@@ -27,19 +27,29 @@ const Detail = () => {
 			</Section>
 			<Section>
 				<div>
-					<h2>집 전체</h2>
-					<Text>오두막 전체를 단독으로 사용하게 됩니다.</Text>
+					<h2>
+						<i class="fas fa-home"></i> 집 전체
+					</h2>
+					<Text others="margin-left:1.5rem">
+						오두막 전체를 단독으로 사용하게 됩니다.
+					</Text>
 				</div>
 				<div>
-					<h2>순조로운 체크인 과정</h2>
-					<Text>
+					<h2>
+						<i class="fas fa-key"></i> 순조로운 체크인 과정
+					</h2>
+					<Text others="margin-left:1.5rem">
 						최근 숙박한 게스트 중 90%가 체크인 과정에 별점 5점을 준
 						숙소입니다.
 					</Text>
 				</div>
 				<div>
-					<h2>반려동물 입실 가능</h2>
-					<Text>게스트가 자주 찾는 편의시설</Text>
+					<h2>
+						<i class="far fa-bookmark"></i> 반려동물 입실 가능
+					</h2>
+					<Text others="margin-left:1.5rem">
+						게스트가 자주 찾는 편의시설
+					</Text>
 				</div>
 				<Hr />
 			</Section>
@@ -75,11 +85,32 @@ const Detail = () => {
 				>
 					숙소 편의시설
 				</Text>
-				<Text>알뜰 전망</Text>
-				<Text>정원 전망</Text>
-				<Text>공용 해변과 인접 / 해변</Text>
-				<Text>주방</Text>
-				<Text>건물 내 무료주차</Text>
+				<FlexCenterR>
+					<FlexCenter>
+						<Text>
+							<i class="fas fa-fan"></i> 알뜰 전망
+						</Text>
+						<Text>
+							<i class="fas fa-fan"></i> 정원 전망
+						</Text>
+						<Text>
+							<i class="fas fa-water"></i> 공용 해변과 인접 / 해변
+						</Text>
+						<Text>주방</Text>
+						<Text>
+							<i class="fas fa-car"></i> 건물 내 무료주차
+						</Text>
+					</FlexCenter>
+					<FlexCenter>
+						<Text>
+							<i class="fas fa-fan"></i> 알뜰 전망
+						</Text>
+						<Text>정원 전망</Text>
+						<Text>공용 해변과 인접 / 해변</Text>
+						<Text>주방</Text>
+						<Text>건물 내 무료주차</Text>
+					</FlexCenter>
+				</FlexCenterR>
 				<Hr />
 			</Section>
 			<Section>
