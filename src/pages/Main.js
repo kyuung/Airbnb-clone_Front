@@ -21,18 +21,26 @@ const Main = () => {
 					others="display:flex; justify-content:center; align-items:center; flex-direction:column"
 					src="https://a0.muscache.com/im/pictures/57b9f708-bb12-498c-bc33-769f8fc43e63.jpg?im_w=2560"
 				>
-					<Text>
+					<Text bold="600" fontSize="1.2rem">
 						어디든 상관없이 떠나고 싶을 때 에어비앤비가
 						도와드립니다!
 					</Text>
-					<Button>유연한 검색</Button>
+					<Button
+						style={{
+							marginTop: '1rem',
+							height: '4rem',
+							width: '14rem',
+						}}
+					>
+						<Span>유연한 검색</Span>
+					</Button>
 				</Img>
 			</section>
 			<Section>
 				<div
 					style={{
 						marginLeft: '5rem',
-						marginTop: '2rem',
+						marginTop: '4rem',
 						marginBottom: '1rem',
 					}}
 				>
@@ -46,7 +54,7 @@ const Main = () => {
 				<div
 					style={{
 						marginLeft: '5rem',
-						marginTop: '2rem',
+						marginTop: '4rem',
 						marginBottom: '1rem',
 					}}
 				>
@@ -118,13 +126,34 @@ const Main = () => {
 					width: '100vw',
 					alignItems: 'center',
 					marginTop: '2rem',
+					marginBottom: '2rem',
 				}}
 			>
+				<div
+					style={{
+						marginLeft: '5rem',
+						marginTop: '2rem',
+						marginBottom: '1rem',
+						width: '92vw',
+					}}
+				>
+					<Text bold="700" fontSize="2rem" others="text-align:left;">
+						특별한 즐길거리를 찾아보세요
+					</Text>
+				</div>
 				<BigCard />
 			</Section>
 		</>
 	);
 };
+
+const Span = styled.span`
+	background: linear-gradient(90deg, #6f019c 0%, #c6017e 135.12%);
+	color: transparent;
+	-webkit-background-clip: text;
+	font-size: 1.2rem;
+	font-weight: 700;
+`;
 
 const Button = styled.button`
 	width: 10rem;

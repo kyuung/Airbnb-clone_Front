@@ -322,7 +322,7 @@ const Detail = () => {
 };
 
 const Section = styled.section`
-	width: 60vw;
+	width: 80vw;
 	padding-left: 10rem;
 	padding-right: 10rem;
 `;

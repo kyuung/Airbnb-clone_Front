@@ -103,7 +103,7 @@ const ScrollX = styled.div`
 	scroll-snap-type: x mandatory;
 	grid-auto-flow: column;
 	overflow-x: auto;
-	width: 90vw;
+	width: 95vw;
 	place-items: center;
 	-ms-overflow-style: none;
 	&::-webkit-scrollbar {
