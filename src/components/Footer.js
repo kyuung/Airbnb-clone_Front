@@ -118,6 +118,7 @@ const ScrollXChild = styled.div`
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-direction: column;
+	width: 10rem;
 	margin-right: 2rem;
 	&:last-child {
 		margin-right: 0;

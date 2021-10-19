@@ -1,10 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import Calendar from '../components/Calendar';
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 import Img from '../elements/Img';
 import Text from '../elements/Text';
 
 const Detail = () => {
+	const [initalDescription, setDescription] = React.useState('');
+	const [updateDescription, setUpdateDescription] = React.useState('');
+	const [checkInDate, setCheckInDate] = React.useState('');
+	const [checkOutDate, setCheckOutDate] = React.useState('');
+	const [reviewState, setReviewState] = React.useState(false);
+
+	const submitReview = () => {
+		console.log(initalDescription, '리뷰 axios post 부분');
+	};
+
+	const deleteReview = () => {
+		console.log('리뷰 axios delete 부분');
+	};
+
+	const updateReview = () => {
+		!reviewState && setReviewState(true);
+		if (reviewState && updateReview !== '') {
+			console.log('axios 수정 요청', updateDescription);
+			setReviewState(false);
+		}
+	};
+
 	return (
 		<FlexCenter>
 			<Section>
@@ -56,7 +79,7 @@ const Detail = () => {
 			<Section>
 				<div>
 					<h2>
-						<i class="fas fa-home"></i> 집 전체
+						<i className="fas fa-home"></i> 집 전체
 					</h2>
 					<Text others="margin-left:1.5rem">
 						오두막 전체를 단독으로 사용하게 됩니다.
@@ -64,7 +87,7 @@ const Detail = () => {
 				</div>
 				<div>
 					<h2>
-						<i class="fas fa-key"></i> 순조로운 체크인 과정
+						<i className="fas fa-key"></i> 순조로운 체크인 과정
 					</h2>
 					<Text others="margin-left:1.5rem">
 						최근 숙박한 게스트 중 90%가 체크인 과정에 별점 5점을 준
@@ -73,7 +96,7 @@ const Detail = () => {
 				</div>
 				<div>
 					<h2>
-						<i class="far fa-bookmark"></i> 반려동물 입실 가능
+						<i className="far fa-bookmark"></i> 반려동물 입실 가능
 					</h2>
 					<Text others="margin-left:1.5rem">
 						게스트가 자주 찾는 편의시설
@@ -140,22 +163,22 @@ const Detail = () => {
 				<ScrollX>
 					<ScrollXChild>
 						<Text>
-							<i class="fas fa-fan"></i> 알뜰 전망
+							<i className="fas fa-fan"></i> 알뜰 전망
 						</Text>
 						<Text>
-							<i class="fas fa-fan"></i> 정원 전망
+							<i className="fas fa-fan"></i> 정원 전망
 						</Text>
 						<Text>
-							<i class="fas fa-water"></i> 공용 해변과 인접
+							<i className="fas fa-water"></i> 공용 해변과 인접
 						</Text>
 						<Text>주방</Text>
 						<Text>
-							<i class="fas fa-car"></i> 건물 내 무료주차
+							<i className="fas fa-car"></i> 건물 내 무료주차
 						</Text>
 					</ScrollXChild>
 					<ScrollXChild>
 						<Text>
-							<i class="fas fa-fan"></i> 알뜰 전망
+							<i className="fas fa-fan"></i> 알뜰 전망
 						</Text>
 						<Text>정원 전망</Text>
 						<Text>공용 해변과 인접</Text>
@@ -187,7 +210,22 @@ const Detail = () => {
 						>
 							체크인 날짜를 선택해주세요.
 						</Text>
-						<Calendar />
+						<Flex>
+							<DayPicker
+								format="DD/MM/YYYY"
+								onDayClick={(e) => {
+									let day = e.toLocaleDateString();
+									day = day.replaceAll('.', '-');
+									day = day.replaceAll(' ', '');
+									day = day.slice(0, 10);
+									if (day.slice(-1) === '-') {
+										day = day.slice(0, -1);
+									}
+									setCheckInDate(day);
+									console.log(checkInDate);
+								}}
+							/>
+						</Flex>
 					</ScrollXChild>
 					<ScrollXChild>
 						<Text
@@ -197,7 +235,22 @@ const Detail = () => {
 						>
 							체크아웃 날짜를 선택해주세요.
 						</Text>
-						<Calendar />
+						<Flex>
+							<DayPicker
+								format="DD/MM/YYYY"
+								onDayClick={(e) => {
+									let day = e.toLocaleDateString();
+									day = day.replaceAll('.', '-');
+									day = day.replaceAll(' ', '');
+									day = day.slice(0, 10);
+									if (day.slice(-1) === '-') {
+										day = day.slice(0, -1);
+									}
+									setCheckOutDate(day);
+									console.log(checkOutDate);
+								}}
+							/>
+						</Flex>
 					</ScrollXChild>
 				</ScrollX>
 
@@ -213,77 +266,54 @@ const Detail = () => {
 				</Text>
 				<ScrollX>
 					<ReviewBox>
-						<Text
-							bold="700"
-							fontSize="1rem"
-							others="margin-bottom:1rem"
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'space-between',
+								alignItems: 'flex-start',
+							}}
 						>
-							리뷰 작성자 뿌리는곳
-						</Text>
-						<Text
-							bold="700"
-							fontSize="1rem"
-							others="margin-bottom:1rem"
-						>
-							리뷰 단 시간 뿌리는곳
-						</Text>
-						<Text>리뷰 내용 뿌리는곳</Text>
-					</ReviewBox>
-					<ReviewBox>
-						<Text
-							bold="700"
-							fontSize="1rem"
-							others="margin-bottom:1rem"
-						>
-							리뷰 작성자 뿌리는곳
-						</Text>
-						<Text
-							bold="700"
-							fontSize="1rem"
-							others="margin-bottom:1rem"
-						>
-							리뷰 단 시간 뿌리는곳
-						</Text>
-						<Text>리뷰 내용 뿌리는곳</Text>
-					</ReviewBox>
-					<ReviewBox>
-						<Text
-							bold="700"
-							fontSize="1rem"
-							others="margin-bottom:1rem"
-						>
-							리뷰 작성자 뿌리는곳
-						</Text>
-						<Text
-							bold="700"
-							fontSize="1rem"
-							others="margin-bottom:1rem"
-						>
-							리뷰 단 시간 뿌리는곳
-						</Text>
-						<Text>리뷰 내용 뿌리는곳</Text>
-					</ReviewBox>
-					<ReviewBox>
-						<Text
-							bold="700"
-							fontSize="1rem"
-							others="margin-bottom:1rem"
-						>
-							리뷰 작성자 뿌리는곳
-						</Text>
-						<Text
-							bold="700"
-							fontSize="1rem"
-							others="margin-bottom:1rem"
-						>
-							리뷰 단 시간 뿌리는곳
-						</Text>
-						<Text>리뷰 내용 뿌리는곳</Text>
+							<div>
+								<Text
+									bold="700"
+									fontSize="1rem"
+									others="margin-top:0.5rem; margin-bottom: 1rem;"
+								>
+									리뷰 작성자 뿌리는곳
+								</Text>
+								<Text
+									bold="700"
+									fontSize="1rem"
+									others="margin-bottom:1rem"
+								>
+									리뷰 단 시간 뿌리는곳
+								</Text>
+								{reviewState ? (
+									<UpdateInput
+										onChange={(e) =>
+											setUpdateDescription(e.target.value)
+										}
+									/>
+								) : (
+									<Text>리뷰 내용 뿌리는곳</Text>
+								)}
+							</div>
+							<div style={{ width: '3rem' }}>
+								<OptionBtn onClick={deleteReview}>X</OptionBtn>
+								<OptionBtn onClick={updateReview}>
+									수정
+								</OptionBtn>
+							</div>
+						</div>
 					</ReviewBox>
 				</ScrollX>
 				<FlexCenterR>
-					<Input />
-					<Button>등록</Button>
+					<Input
+						onChange={(e) => {
+							setDescription(e.target.value);
+						}}
+					/>
+					<Button onClick={submitReview}>등록</Button>
 				</FlexCenterR>
 				<Hr />
 			</Section>
@@ -335,6 +365,7 @@ const Input = styled.input`
 	margin-top: 1rem;
 	border-radius: 20px;
 	border: 1px solid lightgray;
+	padding-left: 1rem;
 `;
 
 const Button = styled.button`
@@ -355,6 +386,10 @@ const ScrollX = styled.div`
 	scroll-snap-type: x mandatory;
 	grid-auto-flow: column;
 	overflow-x: auto;
+	-ms-overflow-style: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 `;
 
 const ScrollXChild = styled.div`
@@ -363,9 +398,33 @@ const ScrollXChild = styled.div`
 	align-items: center;
 	flex-direction: column;
 	margin-right: 2rem;
+
 	&:last-child {
 		margin-right: 0;
 	}
+`;
+
+const OptionBtn = styled.button`
+	width: 3.5rem;
+	height: 2.3rem;
+	border: none;
+	border-radius: 0.5rem;
+	margin-bottom: 0.1rem;
+	transition: background-color 150ms ease-in-out;
+	&:hover {
+		background-color: black;
+		color: white;
+	}
+`;
+
+const UpdateInput = styled.input`
+	width: 10rem;
+	height: 3rem;
+`;
+
+const Flex = styled.div`
+	margin-left: 3rem;
+	margin-right: 3rem;
 `;
 
 export default Detail;

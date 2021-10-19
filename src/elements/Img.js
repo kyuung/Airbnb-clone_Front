@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styled from 'styled-components';
 
 const Img = (props) => {
-	const { width, height, bradius, others, src } = props;
+	const { width, height, bradius, others, src, children } = props;
 	const styles = { width, height, bradius, others, src };
 	return (
 		<>
-			<ImgBox {...styles} />
+			<ImgBox {...styles}>{children}</ImgBox>
 		</>
 	);
 };
@@ -17,6 +17,7 @@ Img.defaultProps = {
 	bradius: '0px',
 	src: 'https://my-speak-app.s3.ap-northeast-2.amazonaws.com/cat1.jpeg',
 	others: '',
+	children: null,
 };
 
 const ImgBox = styled.div`
