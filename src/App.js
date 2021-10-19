@@ -4,7 +4,12 @@ import { history } from './redux/configureStore'
 import { ConnectedRouter } from 'connected-react-router'
 
 import Main from './pages/Main'
-import List from './pages/List'
+import MapList from './pages/MapList'
+import InfinityList from './pages/InfinityList'
+import Detail from './pages/Detail'
+import Test from './pages/Test'
+import Map from './components/Map'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -12,9 +17,14 @@ function App() {
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={Main}></Route>
-          <Route path="/List" exact component={List}></Route>
+          <Route path="/map-list" exact component={MapList}></Route>
+          <Route path="/infinity-list" exact component={InfinityList}></Route>
+          <Route path="/detail" exact component={Detail}></Route>
+          {/* <Route paht="/test" exact component={Test}></Route> */}
+          <Route paht="/map" exact component={Map}></Route>
         </Switch>
       </ConnectedRouter>
+      <Footer />
     </>
   )
 }
