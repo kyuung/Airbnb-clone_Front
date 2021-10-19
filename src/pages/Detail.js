@@ -8,12 +8,40 @@ const Detail = () => {
 	return (
 		<FlexCenter>
 			<Section>
-				<Img
-					width="60vw"
-					height="18rem"
-					bradius="20px"
-					others="margin-top:1rem"
-				/>
+				<ScrollX>
+					<ScrollXChild>
+						<Img
+							width="20rem"
+							height="18rem"
+							bradius="20px"
+							others="margin-top:1rem"
+						/>
+					</ScrollXChild>
+					<ScrollXChild>
+						<Img
+							width="20rem"
+							height="18rem"
+							bradius="20px"
+							others="margin-top:1rem"
+						/>
+					</ScrollXChild>
+					<ScrollXChild>
+						<Img
+							width="20rem"
+							height="18rem"
+							bradius="20px"
+							others="margin-top:1rem"
+						/>
+					</ScrollXChild>
+					<ScrollXChild>
+						<Img
+							width="20rem"
+							height="18rem"
+							bradius="20px"
+							others="margin-top:1rem"
+						/>
+					</ScrollXChild>
+				</ScrollX>
 				<h1>영덕 감성 산장</h1>
 				<Text bold="700">4.44 (후기 59개)</Text>
 				<Text>여기에 해당 숙소 위치 뿌리기</Text>
@@ -23,7 +51,7 @@ const Detail = () => {
 				<h2>오두막</h2>
 				<h2>호스트 : 현수님</h2>
 				<Text>최대 인원 4명 / 침실 2개 / 침대 3개 / 욕실 2개</Text>
-				<Hr />,
+				<Hr />
 			</Section>
 			<Section>
 				<div>
@@ -109,8 +137,8 @@ const Detail = () => {
 				>
 					숙소 편의시설
 				</Text>
-				<FlexCenterR>
-					<FlexCenter>
+				<ScrollX>
+					<ScrollXChild>
 						<Text>
 							<i class="fas fa-fan"></i> 알뜰 전망
 						</Text>
@@ -118,23 +146,23 @@ const Detail = () => {
 							<i class="fas fa-fan"></i> 정원 전망
 						</Text>
 						<Text>
-							<i class="fas fa-water"></i> 공용 해변과 인접 / 해변
+							<i class="fas fa-water"></i> 공용 해변과 인접
 						</Text>
 						<Text>주방</Text>
 						<Text>
 							<i class="fas fa-car"></i> 건물 내 무료주차
 						</Text>
-					</FlexCenter>
-					<FlexCenter>
+					</ScrollXChild>
+					<ScrollXChild>
 						<Text>
 							<i class="fas fa-fan"></i> 알뜰 전망
 						</Text>
 						<Text>정원 전망</Text>
-						<Text>공용 해변과 인접 / 해변</Text>
+						<Text>공용 해변과 인접</Text>
 						<Text>주방</Text>
 						<Text>건물 내 무료주차</Text>
-					</FlexCenter>
-				</FlexCenterR>
+					</ScrollXChild>
+				</ScrollX>
 				<Hr />
 			</Section>
 			<Section>
