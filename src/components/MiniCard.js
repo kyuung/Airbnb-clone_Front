@@ -5,7 +5,6 @@ import Text from '../elements/Text';
 
 const MiniCard = () => {
 	return (
-		// ! 필터 버튼은 전부 가져가고 + 날짜 + 인원 // 모달에선 가격범위 + 침실과 침대에선 침대수, 호스트 언어(영어, 한국어, 독일어), 숙소 이용규칙 (반려동물 입실 가능, 흡연 가능) //
 		<section
 			style={{
 				width: '95vw',

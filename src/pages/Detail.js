@@ -6,6 +6,8 @@ import Img from '../elements/Img';
 import Text from '../elements/Text';
 
 const Detail = () => {
+	// ! 0이면 체크인날짜선택, 1이면 체크아웃 날짜 선택, 2면 인원 선택, 3면 선택한 내용물이랑 예약하기 버튼
+	const [reserveStatus, setReserveStatus] = React.useState(0);
 	const [initalDescription, setDescription] = React.useState('');
 	const [updateDescription, setUpdateDescription] = React.useState('');
 	const [checkInDate, setCheckInDate] = React.useState('');
@@ -228,6 +230,9 @@ const Detail = () => {
 						</Flex>
 					</ScrollXChild>
 					<ScrollXChild>
+						{/* {if(reserveStatus===0) {
+							return null
+						}} */}
 						<Text
 							bold="700"
 							fontSize="1.6rem"
