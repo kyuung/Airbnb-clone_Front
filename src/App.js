@@ -7,6 +7,8 @@ import Main from './pages/Main'
 import MapList from './pages/MapList'
 import InfinityList from './pages/InfinityList'
 import Detail from './pages/Detail'
+import Test from './pages/Test'
+import Map from './components/Map'
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/map-list" exact component={MapList}></Route>
           <Route path="/infinity-list" exact component={InfinityList}></Route>
           <Route path="/detail" exact component={Detail}></Route>
+          {/* <Route paht="/test" exact component={Test}></Route> */}
+          <Route paht="/map" exact component={Map}></Route>
         </Switch>
       </ConnectedRouter>
     </>

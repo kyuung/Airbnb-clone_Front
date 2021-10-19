@@ -1,38 +1,34 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-import loggerMiddleware from 'redux-logger'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { combineReducers } from 'redux'
 import { createBrowserHistory } from 'history'
 import { connectRouter } from 'connected-react-router'
-import { takeEvery, call, put, all } from 'redux-saga/effects'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
-/* saga */
-import { counterSaga } from './modules/counter'
-/* reducer */
-import Counter from './modules/counter'
+/* 모듈 불러오기 */
+import counterSlice from './modules/counter'
+import roomSlice from './modules/roomSlice'
 
 export const history = createBrowserHistory()
 
-const rootReducer = combineReducers({
-  counter: Counter,
+/* 리듀서 전달하기 */
+const reducer = combineReducers({
   router: connectRouter(history),
+  counter: counterSlice.reducer,
+  room: roomSlice.reducer,
 })
 
-function* rootSaga() {
-  yield all([counterSaga])
+const middlewares = []
+
+const env = process.env.NODE_ENV
+
+if (env === 'development') {
+  const { logger } = require('redux-logger')
+  middlewares.push(logger)
 }
 
-const sagaMiddleware = createSagaMiddleware()
-const middlewares = [sagaMiddleware, loggerMiddleware]
-
-const enhancer =
-  process.env.NODE_ENV === 'production'
-    ? compose(applyMiddleware(...middlewares))
-    : composeWithDevTools(applyMiddleware(...middlewares))
-
-const store = createStore(rootReducer, enhancer)
-
-sagaMiddleware.run(rootSaga)
-//store.sagaTask =
+const store = configureStore({
+  reducer,
+  middleware: [...middlewares, ...getDefaultMiddleware()],
+  devTools: env !== 'production',
+})
 
 export default store
