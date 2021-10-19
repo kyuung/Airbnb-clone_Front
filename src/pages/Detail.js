@@ -23,7 +23,7 @@ const Detail = () => {
 				<h2>오두막</h2>
 				<h2>호스트 : 현수님</h2>
 				<Text>최대 인원 4명 / 침실 2개 / 침대 3개 / 욕실 2개</Text>
-				<Hr />
+				<Hr />,
 			</Section>
 			<Section>
 				<div>
@@ -72,8 +72,32 @@ const Detail = () => {
 					숙박 장소
 				</Text>
 				<div>
-					<Img bradius="20px" others="margin-bottom:1rem" />
-					<Text>퀸 사이즈 침대 1개, 에어 메트리스 뭐시기</Text>
+					<ScrollX>
+						<ScrollXChild>
+							<Img bradius="20px" others="margin-bottom:1rem" />
+							<Text>
+								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
+							</Text>
+						</ScrollXChild>
+						<ScrollXChild>
+							<Img bradius="20px" others="margin-bottom:1rem" />
+							<Text>
+								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
+							</Text>
+						</ScrollXChild>
+						<ScrollXChild>
+							<Img bradius="20px" others="margin-bottom:1rem" />
+							<Text>
+								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
+							</Text>
+						</ScrollXChild>
+						<ScrollXChild>
+							<Img bradius="20px" others="margin-bottom:1rem" />
+							<Text>
+								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
+							</Text>
+						</ScrollXChild>
+					</ScrollX>
 				</div>
 				<Hr />
 			</Section>
@@ -126,28 +150,28 @@ const Detail = () => {
 				<Hr />
 			</Section>
 			<Section>
-				<FlexCenterR>
-					<FlexCenter>
+				<ScrollX>
+					<ScrollXChild>
 						<Text
 							bold="700"
-							fontSize="2rem"
+							fontSize="1.6rem"
 							others="margin-top:1rem;margin-bottom:2rem;"
 						>
 							체크인 날짜를 선택해주세요.
 						</Text>
 						<Calendar />
-					</FlexCenter>
-					<FlexCenter>
+					</ScrollXChild>
+					<ScrollXChild>
 						<Text
 							bold="700"
-							fontSize="2rem"
+							fontSize="1.6rem"
 							others="margin-top:1rem;margin-bottom:2rem;"
 						>
 							체크아웃 날짜를 선택해주세요.
 						</Text>
 						<Calendar />
-					</FlexCenter>
-				</FlexCenterR>
+					</ScrollXChild>
+				</ScrollX>
 
 				<Hr />
 			</Section>
@@ -159,23 +183,76 @@ const Detail = () => {
 				>
 					4.44 / 후기 0개
 				</Text>
-				<ReviewBox>
-					<Text
-						bold="700"
-						fontSize="1rem"
-						others="margin-bottom:1rem"
-					>
-						리뷰 작성자 뿌리는곳
-					</Text>
-					<Text
-						bold="700"
-						fontSize="1rem"
-						others="margin-bottom:1rem"
-					>
-						리뷰 단 시간 뿌리는곳
-					</Text>
-					<Text>리뷰 내용 뿌리는곳</Text>
-				</ReviewBox>
+				<ScrollX>
+					<ReviewBox>
+						<Text
+							bold="700"
+							fontSize="1rem"
+							others="margin-bottom:1rem"
+						>
+							리뷰 작성자 뿌리는곳
+						</Text>
+						<Text
+							bold="700"
+							fontSize="1rem"
+							others="margin-bottom:1rem"
+						>
+							리뷰 단 시간 뿌리는곳
+						</Text>
+						<Text>리뷰 내용 뿌리는곳</Text>
+					</ReviewBox>
+					<ReviewBox>
+						<Text
+							bold="700"
+							fontSize="1rem"
+							others="margin-bottom:1rem"
+						>
+							리뷰 작성자 뿌리는곳
+						</Text>
+						<Text
+							bold="700"
+							fontSize="1rem"
+							others="margin-bottom:1rem"
+						>
+							리뷰 단 시간 뿌리는곳
+						</Text>
+						<Text>리뷰 내용 뿌리는곳</Text>
+					</ReviewBox>
+					<ReviewBox>
+						<Text
+							bold="700"
+							fontSize="1rem"
+							others="margin-bottom:1rem"
+						>
+							리뷰 작성자 뿌리는곳
+						</Text>
+						<Text
+							bold="700"
+							fontSize="1rem"
+							others="margin-bottom:1rem"
+						>
+							리뷰 단 시간 뿌리는곳
+						</Text>
+						<Text>리뷰 내용 뿌리는곳</Text>
+					</ReviewBox>
+					<ReviewBox>
+						<Text
+							bold="700"
+							fontSize="1rem"
+							others="margin-bottom:1rem"
+						>
+							리뷰 작성자 뿌리는곳
+						</Text>
+						<Text
+							bold="700"
+							fontSize="1rem"
+							others="margin-bottom:1rem"
+						>
+							리뷰 단 시간 뿌리는곳
+						</Text>
+						<Text>리뷰 내용 뿌리는곳</Text>
+					</ReviewBox>
+				</ScrollX>
 				<FlexCenterR>
 					<Input />
 					<Button>등록</Button>
@@ -203,6 +280,10 @@ const ReviewBox = styled.article`
 	border-radius: 20px;
 	border: 1px solid lightgray;
 	padding: 1rem;
+	margin-right: 2rem;
+	&:last-child {
+		margin-right: 0;
+	}
 `;
 
 const FlexCenter = styled.div`
@@ -235,6 +316,28 @@ const Button = styled.button`
 	border-radius: 20px;
 	border: 1px solid lightgray;
 	margin-left: 1rem;
+`;
+
+const ScrollX = styled.div`
+	padding-left: 24px;
+	padding-right: 24px;
+	scroll-padding: 0px 24px;
+	display: grid;
+	--column-count: 4;
+	scroll-snap-type: x mandatory;
+	grid-auto-flow: column;
+	overflow-x: auto;
+`;
+
+const ScrollXChild = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-right: 2rem;
+	&:last-child {
+		margin-right: 0;
+	}
 `;
 
 export default Detail;
