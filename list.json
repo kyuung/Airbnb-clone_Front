@@ -1,0 +1,124 @@
+{
+  "roomList": [
+    {
+      "roomId": 1,
+      "locationName": "바기오, Cordillera Administrative Region",
+      "pricePerDay": "139672",
+      "distance": "2,369km",
+      "available": "2021.11.12-2021.11.19",
+      "imageUrl": "https://a0.muscache.com/im/pictures/455ef33d-3bfd-4a2a-9bbf-91b7fe399761.jpg?im_w=1200",
+      "location": {
+        "lat": 37.8158716541075,
+        "lon": 128.893022234386
+      }
+    },
+    {
+      "roomId": 2,
+      "locationName": "강릉시, 강원도",
+      "pricePerDay": "256369",
+      "distance": "196km",
+      "available": "2021.11.12-2021.11.19",
+      "imageUrl": "https://a0.muscache.com/im/pictures/b1a320b3-21f1-49f2-a535-7ee4dbc1a2b4.jpg?im_w=1200",
+      "location": {
+        "lat": 37.889938,
+        "lon": 127.75245
+      }
+    },
+    {
+      "roomId": 2,
+      "locationName": "Cdministrative Aegion",
+      "pricePerDay": "139672",
+      "distance": "2,369km",
+      "available": "2021.11.12-2021.11.19",
+      "imageUrl": "https://a0.muscache.com/im/pictures/e617374c-6e91-4015-a46f-7a4e3895b98b.jpg?im_w=1200",
+      "location": {
+        "lat": 37.519928,
+        "lon": 127.055982
+      }
+    },
+    {
+      "roomId": 3,
+      "locationName": "체리벨, Administrative Region",
+      "pricePerDay": "159672",
+      "distance": "3,369km",
+      "available": "2021.11.15-2021.11.20",
+      "imageUrl": "https://a0.muscache.com/im/pictures/fd4e94ce-2c3e-4373-a10f-9f8b2f0cee49.jpg?im_w=1200",
+      "location": {
+        "lat": 37.497936,
+        "lon": 128.027314
+      }
+    },
+    {
+      "roomId": 4,
+      "locationName": "Kota Belud, Sabah",
+      "pricePerDay": "349580",
+      "distance": "3,528km",
+      "available": "2021.10.22-2021.10.29",
+      "imageUrl": "https://a0.muscache.com/im/pictures/af687d42-d4fe-4758-8eee-c9ab2cce799a.jpg?im_w=1200",
+      "location": {
+        "lat": 6.156581,
+        "lon": 116.375732
+      }
+    },
+    {
+      "roomId": 5,
+      "locationName": "전주시 전북",
+      "pricePerDay": "74200",
+      "distance": "124km",
+      "available": "2021.11.7-2021.11.14",
+      "imageUrl": "https://a0.muscache.com/im/pictures/7e48626d-4141-4505-8197-4dac733a5005.jpg?im_w=1200",
+      "location": {
+        "lat": 37.545384,
+        "lon": 127.017015
+      }
+    },
+    {
+      "roomId": 6,
+      "locationName": "제주도 제주시",
+      "pricePerDay": "138635",
+      "distance": "389km",
+      "available": "2021.11.26-2021.12.3",
+      "imageUrl": "https://a0.muscache.com/im/pictures/5092d377-be60-4b5d-95e7-ad59a767fcae.jpg?im_w=1200",
+      "location": {
+        "lat": 33.496309,
+        "lon": 126.527996
+      }
+    },
+    {
+      "roomId": 7,
+      "locationName": "Gujwa-eup, Jeju-si,제주도",
+      "pricePerDay": "116625",
+      "distance": "375km",
+      "available": "2021.10.31-2021.11.7",
+      "imageUrl": "https://a0.muscache.com/im/pictures/f09523a1-79d4-4587-ad07-7339e5e5ad64.jpg?im_w=1200",
+      "location": {
+        "lat": 33.552758,
+        "lon": 126.713171
+      }
+    },
+    {
+      "roomId": 8,
+      "locationName": "Bongpyeong-myeon, Pyeongchang-gun, 강원도",
+      "pricePerDay": "191449",
+      "distance": "139km",
+      "available": "2021.12.26-2022.1.2",
+      "imageUrl": "https://a0.muscache.com/im/pictures/cdd20f1d-9e8c-4848-895f-16d3667abb03.jpg?im_w=1200",
+      "location": {
+        "lat": 37.559692,
+        "lon": 128.470453
+      }
+    },
+    {
+      "roomId": 9,
+      "locationName": "Ano Mera , Myconos",
+      "pricePerDay": "1726874",
+      "distance": "8477km",
+      "available": "2021.10.22-2022.10.29",
+      "imageUrl": "https://a0.muscache.com/im/pictures/a2a8df4d-3f77-4d2f-b205-3b4380922ee1.jpg?im_w=1200",
+      "location": {
+        "lat": 37.472068,
+        "lon": 126.600268
+      }
+    }
+  ]
+}

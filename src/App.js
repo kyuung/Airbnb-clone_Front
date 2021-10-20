@@ -7,13 +7,14 @@ import Main from './pages/Main'
 import MapList from './pages/MapList'
 import InfinityList from './pages/InfinityList'
 import Detail from './pages/Detail'
-import Test from './pages/Test'
 import Map from './components/Map'
 import Footer from './components/Footer'
+import Header from './components/Header'
 
 function App() {
   return (
     <>
+      {/* <Header /> */}
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={Main}></Route>
