@@ -1,124 +1,56 @@
 {
-  "roomList": [
-    {
-      "roomId": 1,
-      "title": "바기오, Cordillera Administrative Region",
-      "price": "₩139,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/7a1f95b1-99d2-42a9-8cbc-dc798d5c0fc0.jpg?im_w=1200"
-    },
-    {
-      "roomId": 1,
-      "title": "바기오, Cordillera Administrative Region",
-      "price": "₩139,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/7a1f95b1-99d2-42a9-8cbc-dc798d5c0fc0.jpg?im_w=1200"
-    },
-    {
-      "roomId": 1,
-      "title": "바기오, Cordillera Administrative Region",
-      "price": "₩139,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/7a1f95b1-99d2-42a9-8cbc-dc798d5c0fc0.jpg?im_w=1200"
-    },
-    {
-      "roomId": 2,
-      "title": "Jibhi,히마찰프라데시 주(Hi..",
-      "price": "₩129,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-42619024/original/bb160741-3b28-46ed-b702-1de547fc47d9.jpeg?im_w=1200"
-    },
-    {
-      "roomId": 2,
-      "title": "Jibhi,히마찰프라데시 주(Hi..",
-      "price": "₩129,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-42619024/original/bb160741-3b28-46ed-b702-1de547fc47d9.jpeg?im_w=1200"
-    },
-    {
-      "roomId": 2,
-      "title": "Jibhi,히마찰프라데시 주(Hi..",
-      "price": "₩129,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-42619024/original/bb160741-3b28-46ed-b702-1de547fc47d9.jpeg?im_w=1200"
-    },
-    {
-      "roomId": 2,
-      "title": "Jibhi,히마찰프라데시 주(Hi..",
-      "price": "₩129,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-42619024/original/bb160741-3b28-46ed-b702-1de547fc47d9.jpeg?im_w=1200"
-    },
-    {
-      "roomId": 2,
-      "title": "Jibhi,히마찰프라데시 주(Hi..",
-      "price": "₩129,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-42619024/original/bb160741-3b28-46ed-b702-1de547fc47d9.jpeg?im_w=1200"
-    },
-    {
-      "roomId": 2,
-      "title": "Jibhi,히마찰프라데시 주(Hi..",
-      "price": "₩129,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-42619024/original/bb160741-3b28-46ed-b702-1de547fc47d9.jpeg?im_w=1200"
-    },
-    {
-      "roomId": 2,
-      "title": "Jibhi,히마찰프라데시 주(Hi..",
-      "price": "₩129,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-42619024/original/bb160741-3b28-46ed-b702-1de547fc47d9.jpeg?im_w=1200"
-    },
-    {
-      "roomId": 2,
-      "title": "Jibhi,히마찰프라데시 주(Hi..",
-      "price": "₩129,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-42619024/original/bb160741-3b28-46ed-b702-1de547fc47d9.jpeg?im_w=1200"
-    },
-    {
-      "roomId": 3,
-      "title": "바기오, Cordillera Administrative Region",
-      "price": "₩139,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/7a1f95b1-99d2-42a9-8cbc-dc798d5c0fc0.jpg?im_w=1200"
-    },
-    {
-      "roomId": 3,
-      "title": "바기오, Cordillera Administrative Region",
-      "price": "₩139,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/7a1f95b1-99d2-42a9-8cbc-dc798d5c0fc0.jpg?im_w=1200"
-    },
-    {
-      "roomId": 3,
-      "title": "바기오, Cordillera Administrative Region",
-      "price": "₩139,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/7a1f95b1-99d2-42a9-8cbc-dc798d5c0fc0.jpg?im_w=1200"
-    },
-    {
-      "roomId": 3,
-      "title": "바기오, Cordillera Administrative Region",
-      "price": "₩139,672",
-      "distance": "2,369km",
-      "date": "10월 24일 - 10월 31일",
-      "imageUrl": "https://a0.muscache.com/im/pictures/7a1f95b1-99d2-42a9-8cbc-dc798d5c0fc0.jpg?im_w=1200"
-    }
-  ]
+	"roomInfo": [
+		{
+			"roomId": 1,
+			"title": "Vivi un sogno nella camera Deluxe",
+			"host": "Onda",
+			"pricePerDay": "256369",
+			"distance": "2,369km",
+			"available": "2021.11.12-2021.11.19",
+			"category": "멋진 수영장",
+			"amountOfBed": 2,
+			"rating": 0,
+			"locationName": "바기오, Cordillera Administrative Region",
+			"location": {
+				"lat": 37.8158716541075,
+				"lon": 128.893022234386
+			},
+			"rules": ["반려동물", "흡연"],
+			"imageUrl": [
+				"https://a0.muscache.com/im/pictures/8c14a771-d7f3-43e1-a77c-caeb7e875aeb.jpg?im_w=1200",
+				"https://a0.muscache.com/im/pictures/cc8271c2-66bc-4db9-bcb9-1bd30f36f9ed.jpg?im_w=720",
+				"https://a0.muscache.com/im/pictures/05760f67-eb56-4f45-9f14-530a90d15ea0.jpg?im_w=720",
+				"https://a0.muscache.com/im/pictures/7068301f-91a2-4bdb-83da-a898f8e02c78.jpg?im_w=720",
+				"https://a0.muscache.com/im/pictures/65e3300b-36bf-4ffa-8332-aa67f3af1b03.jpg?im_w=720"
+			],
+			"__v": 0,
+			"description": "숙소 설명\n[숙소 소개]\n환상적인 오션뷰와 함께 특별한 여행을 만끽할 수 있는 강릉에 있는 저희 펜션은 전 객실 오션뷰로 넓게 펼쳐진 바다를 한껏 즐길 수 있는 환상적인 펜션입니다.\n어디에도 없던 ‘쉼’을 느껴볼 수 있는 저희 펜션으로 초대합니다.\n[객실 유형]\n복층형(2층에 더블침대1) + 화장실1 / 22평(약73㎡)\n\n[숙소위치/상호/연락처는 예약확정후에 안내드립니다]\n예약확정전에는 에어비앤비 정책상, 숙소의 위치/상호/연락처를 안내할 수 없는 점 양해부탁드립니다.\n에어비앤비 지도에서 대략적인 위치를 확인해주세요.\n\n[예약가능여부 확인]\n실시간 예약특성상 특정시점에 예약가능한지 말씀드리기 어렵습니다.\n에어비앤비 달력을 통해, 이용하고자 하는 날짜를 선택할 수 있는지 예약 가능여부를 직접 확인해주시기 바랍니다.\n숙소\n[주차 안내]\n주차 가능합니다.\n\n[바베큐(자이글)]\n바베큐(자이글) 이용요금은 2인기준 20,000원이며 1인추가시 5,000원 추가됩니다.\n자이글 사용하시는 고객님께서는 펜션에서 결제하시면 됩니다.\n실내 객실에서 바베큐가 가능합니다.\n\n[스파]\n- 객실 전용 스파 이용 가능합니다.\n\n[객실정보]\n- 욕조, 스파 객실 : 플러스405호를 제외한 모든 객실은 욕조 또는 스파시설보유 / 입욕제 사용불가\n- 까사101, 플러스103, 플러스104 : 1층 야외 개인 수영장 (2021.06.01 오픈 예정)\n미온수 신청시 추가 10만원 비용 발생/ 미온수 15:00~21:00 사용가능\n- 401, 402, 403, 404 : 4층 옥상 개인 수영장, 풀장 내 미온수 사용불가\n- 객실 전용 개인 실외수영장: 수영장을 보유한 객실과 일반객실을 함께 예약 불가\n- 실내수영장은 4계절 운영\n- 실외수영장은 하절기에만 이용가능(하절기:6~9월 중순)\n\n기타정보\n[수영장]\n개별 풀빌라 객실 : CASA101, PLUS동 103, PLUS동 104, PLUS동 403, PLUS동 404, CASA풀빌라201, CASA풀빌라 301, PLUS동 풀빌라 204, PLUS동 풀빌라 304\n21년 6월 1일부터 야외수영장 오픈"
+		},
+		{
+			"roomId": 2,
+			"title": "Vivi un sogno nella camera Deluxe2",
+			"host": "Onda",
+			"pricePerDay": "256369",
+			"distance": "2,369km",
+			"available": "2021.11.12-2021.11.19",
+			"category": "멋진 수영장",
+			"amountOfBed": 2,
+			"rating": 0,
+			"locationName": "바기오, Cordillera Administrative Region",
+			"location": {
+				"lat": 37.8158716541075,
+				"lon": 128.893022234386
+			},
+			"rules": ["반려동물", "흡연"],
+			"imageUrl": [
+				"https://a0.muscache.com/im/pictures/8c14a771-d7f3-43e1-a77c-caeb7e875aeb.jpg?im_w=1200",
+				"https://a0.muscache.com/im/pictures/cc8271c2-66bc-4db9-bcb9-1bd30f36f9ed.jpg?im_w=720",
+				"https://a0.muscache.com/im/pictures/05760f67-eb56-4f45-9f14-530a90d15ea0.jpg?im_w=720",
+				"https://a0.muscache.com/im/pictures/7068301f-91a2-4bdb-83da-a898f8e02c78.jpg?im_w=720",
+				"https://a0.muscache.com/im/pictures/65e3300b-36bf-4ffa-8332-aa67f3af1b03.jpg?im_w=720"
+			],
+			"__v": 0,
+			"description": "숙소 설명\n[숙소 소개]\n환상적인 오션뷰와 함께 특별한 여행을 만끽할 수 있는 강릉에 있는 저희 펜션은 전 객실 오션뷰로 넓게 펼쳐진 바다를 한껏 즐길 수 있는 환상적인 펜션입니다.\n어디에도 없던 ‘쉼’을 느껴볼 수 있는 저희 펜션으로 초대합니다.\n[객실 유형]\n복층형(2층에 더블침대1) + 화장실1 / 22평(약73㎡)\n\n[숙소위치/상호/연락처는 예약확정후에 안내드립니다]\n예약확정전에는 에어비앤비 정책상, 숙소의 위치/상호/연락처를 안내할 수 없는 점 양해부탁드립니다.\n에어비앤비 지도에서 대략적인 위치를 확인해주세요.\n\n[예약가능여부 확인]\n실시간 예약특성상 특정시점에 예약가능한지 말씀드리기 어렵습니다.\n에어비앤비 달력을 통해, 이용하고자 하는 날짜를 선택할 수 있는지 예약 가능여부를 직접 확인해주시기 바랍니다.\n숙소\n[주차 안내]\n주차 가능합니다.\n\n[바베큐(자이글)]\n바베큐(자이글) 이용요금은 2인기준 20,000원이며 1인추가시 5,000원 추가됩니다.\n자이글 사용하시는 고객님께서는 펜션에서 결제하시면 됩니다.\n실내 객실에서 바베큐가 가능합니다.\n\n[스파]\n- 객실 전용 스파 이용 가능합니다.\n\n[객실정보]\n- 욕조, 스파 객실 : 플러스405호를 제외한 모든 객실은 욕조 또는 스파시설보유 / 입욕제 사용불가\n- 까사101, 플러스103, 플러스104 : 1층 야외 개인 수영장 (2021.06.01 오픈 예정)\n미온수 신청시 추가 10만원 비용 발생/ 미온수 15:00~21:00 사용가능\n- 401, 402, 403, 404 : 4층 옥상 개인 수영장, 풀장 내 미온수 사용불가\n- 객실 전용 개인 실외수영장: 수영장을 보유한 객실과 일반객실을 함께 예약 불가\n- 실내수영장은 4계절 운영\n- 실외수영장은 하절기에만 이용가능(하절기:6~9월 중순)\n\n기타정보\n[수영장]\n개별 풀빌라 객실 : CASA101, PLUS동 103, PLUS동 104, PLUS동 403, PLUS동 404, CASA풀빌라201, CASA풀빌라 301, PLUS동 풀빌라 204, PLUS동 풀빌라 304\n21년 6월 1일부터 야외수영장 오픈"
+		}
+	]
 }

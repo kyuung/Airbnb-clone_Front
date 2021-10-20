@@ -1,18 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import BigCard from '../components/BigCard';
+import Header from '../components/Header';
 import LiveCard from '../components/LiveCard';
 import MiniCard from '../components/MiniCard';
 import Img from '../elements/Img';
 import Text from '../elements/Text';
+import { history } from '../redux/configureStore';
+import InfoCovid from '../elements/InfoCovid';
+import MainHeader from '../components/MainHeader';
 
 const Main = () => {
 	return (
 		<>
+			<InfoCovid />
+			{/* <Header /> */}
+			<MainHeader />
 			<section
 				style={{
 					width: '100vw',
-					height: '30rem',
+					height: '55rem',
 				}}
 			>
 				<Img
@@ -20,6 +27,7 @@ const Main = () => {
 					height="100%"
 					others="display:flex; justify-content:center; align-items:center; flex-direction:column"
 					src="https://a0.muscache.com/im/pictures/57b9f708-bb12-498c-bc33-769f8fc43e63.jpg?im_w=2560"
+					// _onClick={() => }
 				>
 					<Text bold="600" fontSize="1.2rem">
 						어디든 상관없이 떠나고 싶을 때 에어비앤비가
@@ -30,6 +38,9 @@ const Main = () => {
 							marginTop: '1rem',
 							height: '4rem',
 							width: '14rem',
+						}}
+						onClick={() => {
+							history.push('/infinity-list');
 						}}
 					>
 						<Span>유연한 검색</Span>
