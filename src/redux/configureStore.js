@@ -6,6 +6,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 /* 모듈 불러오기 */
 import counterSlice from './modules/counter';
 import roomSlice from './modules/roomSlice';
+import detailRoomSlice from './modules/detailRoomSlice';
 
 export const history = createBrowserHistory();
 
@@ -14,6 +15,7 @@ const reducer = combineReducers({
 	router: connectRouter(history),
 	counter: counterSlice.reducer,
 	room: roomSlice.reducer,
+	detailRoom: detailRoomSlice.reducer,
 });
 
 const middlewares = [];

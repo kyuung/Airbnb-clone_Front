@@ -6,8 +6,14 @@ import Img from '../elements/Img';
 import Text from '../elements/Text';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDetailRoomListDB } from '../redux/async/detailRoom';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import Marker from '../components/Marker';
 
-const Detail = () => {
+const Detail = (props) => {
+	const dispatch = useDispatch();
+	const post_id = props.match.params.id;
 	const [reserveStatus, setReserveStatus] = React.useState(0);
 	const [counter, setCounter] = React.useState(0);
 	const [initalDescription, setDescription] = React.useState('');
@@ -15,6 +21,12 @@ const Detail = () => {
 	const [checkInDate, setCheckInDate] = React.useState('');
 	const [checkOutDate, setCheckOutDate] = React.useState('');
 	const [reviewState, setReviewState] = React.useState(false);
+
+	const detailList = useSelector((state) => state.detailRoom.list[0]);
+
+	React.useEffect(() => {
+		dispatch(getDetailRoomListDB());
+	}, []);
 
 	const submitReview = () => {
 		console.log(initalDescription, '리뷰 axios post 부분');
@@ -35,61 +47,50 @@ const Detail = () => {
 	return (
 		<FlexCenter>
 			<Header />
-			<Section>
+			<Section style={{ marginTop: '2rem' }}>
 				<ScrollX>
-					<ScrollXChild>
-						<Img
-							width="20rem"
-							height="18rem"
-							bradius="20px"
-							others="margin-top:1rem"
-						/>
-					</ScrollXChild>
-					<ScrollXChild>
-						<Img
-							width="20rem"
-							height="18rem"
-							bradius="20px"
-							others="margin-top:1rem"
-						/>
-					</ScrollXChild>
-					<ScrollXChild>
-						<Img
-							width="20rem"
-							height="18rem"
-							bradius="20px"
-							others="margin-top:1rem"
-						/>
-					</ScrollXChild>
-					<ScrollXChild>
-						<Img
-							width="20rem"
-							height="18rem"
-							bradius="20px"
-							others="margin-top:1rem"
-						/>
-					</ScrollXChild>
+					<ScrollX>
+						{detailList?.imageUrl.map((img, idx) => (
+							<ScrollXChild key={idx}>
+								<Img
+									bradius="20px"
+									others="margin-bottom:1rem"
+									src={img}
+								/>
+							</ScrollXChild>
+						))}
+					</ScrollX>
 				</ScrollX>
-				<h1>title</h1>
+				<h1>
+					{detailList?.host}의 {detailList?.title}
+				</h1>
 				<Text bold="700">
-					<i className="fas fa-star"></i> 4.44 rating
+					<i className="fas fa-star"></i> {detailList?.rating}
 				</Text>
-				<Text>location 위치</Text>
+				<Text others="margin-top:0.7rem;">
+					{detailList?.locationName}
+				</Text>
 				<Hr />
 			</Section>
 			<Section>
-				<h2>오두막</h2>
-				<h2>호스트 : 현수님</h2>
-				<Text>최대 인원 4명 / 침실 2개 / 침대 3개 / 욕실 2개</Text>
+				<h2>{detailList?.category}</h2>
+				<h2>호스트 : {detailList?.host}</h2>
+				<Text>
+					<i className="fas fa-user-friends"></i>
+					<span> </span>최대 인원
+					{detailList?.amountOfBed}명 / <i className="fas fa-bed"></i>
+					<span> </span>침실 {detailList?.amountOfBed}개
+				</Text>
 				<Hr />
 			</Section>
 			<Section>
 				<div>
 					<h2>
-						<i className="fas fa-home"></i> 집 전체
+						<i className="fas fa-home"></i> {detailList?.category}{' '}
+						전체
 					</h2>
 					<Text others="margin-left:1.5rem">
-						오두막 전체를 단독으로 사용하게 됩니다.
+						{detailList?.category}을 사용하게 됩니다.
 					</Text>
 				</div>
 				<div>
@@ -97,28 +98,28 @@ const Detail = () => {
 						<i className="fas fa-key"></i> 순조로운 체크인 과정
 					</h2>
 					<Text others="margin-left:1.5rem">
-						최근 숙박한 게스트 중 90%가 체크인 과정에 별점 5점을 준
-						숙소입니다.
+						최근 숙박한 게스트 중 90%가 체크인 과정에 별점{' '}
+						{detailList?.rating}점을 준 숙소입니다.
 					</Text>
 				</div>
 				<div>
 					<h2>
-						<i className="far fa-bookmark"></i> 반려동물 입실 가능
+						<i className="far fa-bookmark"></i> 숙소 이용 규칙
 					</h2>
 					<Text others="margin-left:1.5rem">
-						게스트가 자주 찾는 편의시설
+						{detailList?.rules.map((rule, idx) => (
+							<Text
+								bold="700"
+								others="margin-bottom:0.2rem"
+								key={idx}
+							>{`${rule}가능`}</Text>
+						))}{' '}
 					</Text>
 				</div>
 				<Hr />
 			</Section>
 			<Section>
-				<Text>
-					동해바다 뭐시기 인포메이션동해바다 뭐시기 인포메이션
-					동해바다 뭐시기 인포메이션 동해바다 뭐시기 인포메이션
-					동해바다 뭐시기 인포메이션 동해바다 뭐시기 인포메이션
-					동해바다 뭐시기 인포메이션 동해바다 뭐시기 인포메이션
-					동해바다 뭐시기 인포메이션
-				</Text>
+				<Text>{detailList?.description}</Text>
 				<Hr />
 			</Section>
 			<Section>
@@ -131,30 +132,15 @@ const Detail = () => {
 				</Text>
 				<div>
 					<ScrollX>
-						<ScrollXChild>
-							<Img bradius="20px" others="margin-bottom:1rem" />
-							<Text>
-								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
-							</Text>
-						</ScrollXChild>
-						<ScrollXChild>
-							<Img bradius="20px" others="margin-bottom:1rem" />
-							<Text>
-								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
-							</Text>
-						</ScrollXChild>
-						<ScrollXChild>
-							<Img bradius="20px" others="margin-bottom:1rem" />
-							<Text>
-								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
-							</Text>
-						</ScrollXChild>
-						<ScrollXChild>
-							<Img bradius="20px" others="margin-bottom:1rem" />
-							<Text>
-								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
-							</Text>
-						</ScrollXChild>
+						{detailList?.imageUrl.map((img, idx) => (
+							<ScrollXChild key={idx}>
+								<Img
+									bradius="20px"
+									others="margin-bottom:1rem"
+									src={img}
+								/>
+							</ScrollXChild>
+						))}
 					</ScrollX>
 				</div>
 				<Hr />
@@ -203,8 +189,18 @@ const Detail = () => {
 				>
 					호스팅 지역
 				</Text>
-				<div>지도를 넣을 곳입니다.</div>
-				<Text>여기에 해당 숙소 위치 뿌리기</Text>
+				<Section>
+					<LoadScript googleMapsApiKey="process.env.REACT_APP_GOOGLE_MAP_KEY">
+						<GoogleMap
+							mapContainerStyle={{
+								width: '400px',
+								height: '400px',
+							}}
+							center={{ lat: -3.745, lng: -38.523 }}
+							zoom={10}
+						/>
+					</LoadScript>
+				</Section>
 				<Hr />
 			</Section>
 			<Section>
@@ -213,7 +209,7 @@ const Detail = () => {
 					fontSize="2rem"
 					others="margin-top:1rem;margin-bottom:2rem;"
 				>
-					예약하기
+					예약하기 : 1박에 {detailList?.pricePerDay}원
 				</Text>
 				<ScrollX>
 					<ScrollXChild>

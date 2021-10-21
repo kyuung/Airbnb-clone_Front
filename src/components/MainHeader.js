@@ -155,7 +155,13 @@ const MainHeader = () => {
 			</HeaderFeatures>
 			{readStatus > 0 && (
 				<Modal>
-					<CloseBtn>X</CloseBtn>
+					<CloseBtn
+						onClick={() => {
+							setReadStatus(0);
+						}}
+					>
+						X
+					</CloseBtn>
 					{readStatus === 1 && (
 						<Text
 							bold="700"
@@ -270,7 +276,7 @@ const FlexCenterR = styled.div`
 
 const HeaderTextBtn = styled.button`
 	border: none;
-	width: 6rem;
+	width: 8rem;
 	background: none;
 	cursor: pointer;
 `;

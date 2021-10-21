@@ -40,7 +40,7 @@ const Main = () => {
 							width: '14rem',
 						}}
 						onClick={() => {
-							history.push('/infinity-list');
+							history.push('/card-list');
 						}}
 					>
 						<Span>유연한 검색</Span>
