@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Text from '../elements/Text'
 import RowCard from '../components/RowCard'
-import Footer from '../components/Footer'
 import Map from '../components/Map'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
@@ -66,7 +65,6 @@ const ColumnList = () => {
           <Map type={false} />
         </MapArea>
       </Contents>
-      <Footer />
     </FlexContent>
   )
 }
@@ -96,6 +94,7 @@ const CardListArea = styled.div``
 
 const MapArea = styled.div`
   background-color: royalblue;
+  z-index: -1;
   @media (min-width: 1128px) {
     position: fixed;
     right: 0;
