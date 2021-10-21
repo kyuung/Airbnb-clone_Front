@@ -4,8 +4,7 @@ import SignModal from '../components/SignModal';
 
 const HButton = () => {
 	const [basicModalStatus, setBasicModalStauts] = React.useState(false);
-	const [signUp, setSignUp] = React.useState(false);
-	const [signIn, setSignIn] = React.useState(false);
+	const [sign, setSign] = React.useState(false);
 	return (
 		<div>
 			<Container
@@ -22,22 +21,21 @@ const HButton = () => {
 				<UserModal>
 					<UserModalBtn
 						onClick={() => {
-							signUp ? setSignUp(false) : setSignUp(true);
+							sign ? setSign(false) : setSign(true);
 						}}
 					>
 						회원가입
 					</UserModalBtn>
 					<UserModalBtn
 						onClick={() => {
-							signIn ? setSignIn(false) : setSignIn(true);
+							sign ? setSign(false) : setSign(true);
 						}}
 					>
 						로그인
 					</UserModalBtn>
 				</UserModal>
 			)}
-			{signUp && <SignModal _signUpStatus={1} />}
-			{signIn && <SignModal _signInStatus={1} />}
+			{sign && <SignModal _signStatus={true} />}
 		</div>
 	);
 };
