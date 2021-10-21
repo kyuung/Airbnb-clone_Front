@@ -21,7 +21,7 @@ const Card = props => {
           <div>
             <span style={{ fontWeight: '600' }}>{info.locationName}</span>
           </div>
-          <div>{info.pricePerDay} / 박</div>
+          <div>{info.price} / 박</div>
         </CardContentArea>
         <CardContentArea>
           <div>

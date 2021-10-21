@@ -1,11 +1,11 @@
-import api from '../api/index';
+import api from '../api/index'
 
 const getRoomList = () => {
-	return api.get('roomList');
-};
+  return api.get('roomListInfo?page=1')
+}
 
 const getDetailRoomList = () => {
-	return api.get('roomInfo');
-};
+  return api.get('roomInfo')
+}
 
-export { getRoomList, getDetailRoomList };
+export { getRoomList, getDetailRoomList }

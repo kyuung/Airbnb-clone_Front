@@ -5,13 +5,21 @@ import RowCard from '../components/RowCard'
 import Map from '../components/Map'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
+import { getRoomListDB } from '../redux/async/room'
+import { useSelector, useDispatch } from 'react-redux'
 
 const ColumnList = () => {
-  const cardList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const dispatch = useDispatch()
+  const roomList = useSelector(state => state.room.list)
+  console.log('roomList', roomList)
   const [page, setPage] = React.useState(1)
   const handleChange = (event, value) => {
     setPage(value)
   }
+
+  React.useEffect(() => {
+    dispatch(getRoomListDB())
+  }, [])
   return (
     <FlexContent>
       <Contents>
@@ -42,8 +50,8 @@ const ColumnList = () => {
             </Text>
           </Section>
           <CardListArea>
-            {cardList.length > 0 &&
-              cardList.map((info, idx) => {
+            {roomList.length > 0 &&
+              roomList.map((info, idx) => {
                 return (
                   <React.Fragment key={idx}>
                     <RowCard info={info} />
@@ -62,7 +70,7 @@ const ColumnList = () => {
           </Stack>
         </RoomInfoArea>
         <MapArea>
-          <Map type={false} />
+          <Map roomList={roomList} type={false} />
         </MapArea>
       </Contents>
     </FlexContent>
@@ -94,7 +102,6 @@ const CardListArea = styled.div``
 
 const MapArea = styled.div`
   background-color: royalblue;
-  z-index: -1;
   @media (min-width: 1128px) {
     position: fixed;
     right: 0;

@@ -21,7 +21,7 @@ const Map = props => {
                   <Marker
                     lat={location.lat}
                     lng={location.lon}
-                    text={`₩${v.pricePerDay}`}
+                    text={`₩${v.price}`}
                   />
                 )
               })}
@@ -35,7 +35,14 @@ const Map = props => {
               bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_KEY }}
               defaultCenter={props.center}
               defaultZoom={zoom}
-            ></GoogleMap>
+            >
+              {roomList.map((v, idx) => {
+                const location = v.location
+                return (
+                  <Marker lat={location.lat} lng={location.lon} type="home" />
+                )
+              })}
+            </GoogleMap>
           </div>
         </>
       )}
@@ -48,7 +55,7 @@ Map.defaultProps = {
     lat: 37.42990861398286,
     lng: 126.89336566108994,
   },
-  zoom: 5,
+  zoom: 7,
   options: {
     gestureHandling: 'cooperative',
   },

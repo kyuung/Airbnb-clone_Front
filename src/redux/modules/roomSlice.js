@@ -20,7 +20,8 @@ const roomSlice = createSlice({
   extraReducers: {
     /* Fulfilled(이행) 비동기 처리 완료 */
     [getRoomListDB.fulfilled]: (state, { payload }) => {
-      state.list = payload.data
+      console.log('payload', payload)
+      state.list = payload.data[0].roomList
       state.isFetching = false
     },
     /* Pending(대기) */
