@@ -17,6 +17,7 @@ import { BiFilter } from 'react-icons/bi'
 const InfinityList = () => {
   const dispatch = useDispatch()
   const roomList = useSelector(state => state.room.list)
+  console.log('list', roomList)
   const [toggleStatus, setToggleStatus] = React.useState(true)
   const categoryList = [
     '트리하우스',
@@ -79,7 +80,8 @@ const InfinityList = () => {
         <>
           <CardContentsArea>
             <CardListArea>
-              {roomList.length > 0 &&
+              {roomList &&
+                roomList.length > 0 &&
                 roomList.map((info, idx) => {
                   return (
                     <React.Fragment key={idx}>

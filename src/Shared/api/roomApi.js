@@ -1,7 +1,7 @@
 import api from '../api/index'
 
 const getRoomList = () => {
-  return api.get('roomList')
+  return api.get('roomListInfo?page=1')
 }
 
 export { getRoomList }

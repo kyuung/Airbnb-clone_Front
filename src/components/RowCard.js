@@ -1,4 +1,3 @@
-import { getByDisplayValue } from '@testing-library/dom'
 import React from 'react'
 import styled from 'styled-components'
 import Img from '../elements/Img'
@@ -6,32 +5,29 @@ import Text from '../elements/Text'
 import { MdGrade } from 'react-icons/md'
 import { BsHeart } from 'react-icons/bs'
 
-const RowCard = () => {
+const RowCard = props => {
+  const { info } = props
   return (
     <RowCardArea>
       <CardArea>
-        <Img
-          bradius="1rem"
-          width="18rem"
-          height="12rem"
-          src="https://a0.muscache.com/im/pictures/6edce0dc-bafb-4361-b532-0a80d7639d4f.jpg?im_w=720"
-        />
+        <Img bradius="1rem" width="18rem" height="12rem" src={info.imageUrl} />
         <Section>
           <IconArea>
             <BsHeart />
           </IconArea>
-          <SubContent>관악의 공동 주택 전체</SubContent>
-          <Content>서울 32평 아파트 전체 렌트 확 트인뷰 장기 거주하기</Content>
+          <SubContent>{info.locationName}</SubContent>
+          <Content>{info.title}</Content>
           <Hr />
           <SubContent>
-            최대 인원 3명 · 침실 1개 · 침대 1개 · 욕실 1개
+            최대 인원 {info.people}명 · 침실 2개 · 침대 {info.people}개 · 욕실
+            1개
           </SubContent>
           <SubContent>주방 · 에어컨 · 무선 인터넷 · 헤어드라이어</SubContent>
           <GradArea>
             <Grad>
               <MdGrade />
-              <Text color="#000">4.94</Text>
-              <Text color="gray">(후기 34개)</Text>
+              <Text color="#000">{info.rating}</Text>
+              <Text color="gray">(후기 12개)</Text>
             </Grad>
           </GradArea>
         </Section>
