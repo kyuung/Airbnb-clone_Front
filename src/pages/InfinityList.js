@@ -4,10 +4,19 @@ import Card from '../components/Card'
 import { useSelector, useDispatch } from 'react-redux'
 import { getRoomListDB } from '../redux/async/room'
 import Map from '../components/Map'
+import { BsFillMapFill } from 'react-icons/bs'
+import { GoListUnordered } from 'react-icons/go'
+import { IoIosArrowUp } from 'react-icons/io'
+import { IoIosArrowDown } from 'react-icons/io'
+import { BiFilter } from 'react-icons/bi'
 
+/**
+ * @author jinsung
+ * @returns 유현한 검색 리스트
+ */
 const InfinityList = () => {
   const dispatch = useDispatch()
-  const cardList = useSelector(state => state.room.list)
+  const roomList = useSelector(state => state.room.list)
   const [toggleStatus, setToggleStatus] = React.useState(true)
   const categoryList = [
     '트리하우스',
@@ -50,17 +59,31 @@ const InfinityList = () => {
               })}
             </CategoryListArea>
           </CategoryArea>
+          <FilterArea>
+            <FilterButton>
+              언제든
+              <IoIosArrowDown />
+            </FilterButton>
+            <FilterButton>
+              인원
+              <IoIosArrowDown />
+            </FilterButton>
+            <FilterButton>
+              <BiFilter />
+              필터
+            </FilterButton>
+          </FilterArea>
         </Nav>
       </NavArea>
       {toggleStatus ? (
         <>
           <CardContentsArea>
             <CardListArea>
-              {cardList.length > 0 &&
-                cardList.map((v, idx) => {
+              {roomList.length > 0 &&
+                roomList.map((info, idx) => {
                   return (
                     <React.Fragment key={idx}>
-                      <Card image_url={v.imageUrl} />
+                      <Card info={info} />
                     </React.Fragment>
                   )
                 })}
@@ -69,10 +92,22 @@ const InfinityList = () => {
         </>
       ) : (
         <>
-          <Map />
+          <Map roomList={roomList} type={true} />
         </>
       )}
-      <button onClick={componentToggle}>지도로 보기</button>
+      <ToggleBtn onClick={componentToggle}>
+        {toggleStatus ? (
+          <>
+            지도 표시하기
+            <BsFillMapFill />
+          </>
+        ) : (
+          <>
+            목록 보기
+            <GoListUnordered style={{ fontSize: '16px' }} />
+          </>
+        )}
+      </ToggleBtn>
     </>
   )
 }
@@ -82,16 +117,18 @@ const NavArea = styled.div`
   width: 100%;
   margin-top: 8px;
   padding-bottom: 8px;
-  top: 5px;
+  top: 0;
   z-index: 3;
   background-color: #fff;
 `
 
 const Nav = styled.div`
+  display: flex;
   margin: 0 auto !important;
   position: relative !important;
   padding-left: 80px !important;
   padding-right: 80px !important;
+  white-space: nowrap;
 `
 const CategoryArea = styled.div`
   -webkit-box-align: center !important;
@@ -107,6 +144,20 @@ const CategoryListArea = styled.div`
   display: flex;
   min-width: 1px;
   flex-grow: 1;
+`
+
+const FilterArea = styled.div`
+  display: flex;
+  align-items: center;
+`
+const FilterButton = styled.button`
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 10px 16px;
+  margin-right: 8px;
+  cursor: pointer;
 `
 
 const Category = styled.div`
@@ -136,6 +187,7 @@ const CardContentsArea = styled.div`
     padding-left: 80px;
     padding-right: 80px;
     max-width: none;
+    margin-bottom: 50px;
   }
 `
 
@@ -155,6 +207,31 @@ const CardListArea = styled.div`
   }
   @media screen and (min-width: 0px) and (max-width: 551px) {
     grid-template-columns: repeat(1, minmax(0px, 1fr));
+  }
+`
+
+const ToggleBtn = styled.button`
+  position: fixed;
+  bottom: 23px;
+  right: 46%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  border-radius: 24px;
+  padding: 14px 19px;
+  color: #fff;
+  cursor: pointer;
+  border-width: 1px;
+  transition-property: -ms-transform, -webkit-transform, transform !important;
+  transition-duration: 0.25s, 0.25s, 0.25s !important;
+  transition-timing-function: ease, ease, ease !important;
+  transition-delay: 0s, 0s, 0s !important;
+  :hover {
+    transform: scale(1.05);
+  }
+  svg {
+    margin-left: 5px;
   }
 `
 

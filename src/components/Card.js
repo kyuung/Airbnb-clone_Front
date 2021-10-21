@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { BsHeart } from 'react-icons/bs'
 
 const Card = props => {
-  const { image_url, width, height } = props
+  const { info, width, height } = props
   const styles = {
     width: width,
     height: height,
@@ -12,23 +12,23 @@ const Card = props => {
   return (
     <CardContentsArea>
       <CardArea {...styles}>
-        <ImgArea image_url={image_url}>
+        <ImgArea image_url={info.imageUrl}>
           <IconArea>
             <BsHeart />
           </IconArea>
         </ImgArea>
         <CardContentArea>
           <div>
-            <span style={{ fontWeight: '700' }}>Balamban,중부 비사야</span>
+            <span style={{ fontWeight: '600' }}>{info.locationName}</span>
           </div>
-          <div>₩273,718 / 박</div>
+          <div>{info.pricePerDay} / 박</div>
         </CardContentArea>
         <CardContentArea>
           <div>
-            <span style={{ color: '#979a9e' }}>2,954km거리</span>
+            <span style={{ color: '#979a9e' }}>{info.distance}거리</span>
           </div>
           <div>
-            <span style={{ color: '#979a9e' }}>11월 12일 - 11월 19일</span>
+            <span style={{ color: '#979a9e' }}>{info.available}</span>
           </div>
         </CardContentArea>
       </CardArea>

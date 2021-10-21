@@ -5,6 +5,7 @@ import HInput from '../elements/HInput';
 import Logo from '../elements/Logo';
 import Text from '../elements/Text';
 
+
 const Header = (props) => {
 	const { type } = props;
 	if (type === 'basic') {
