@@ -5,6 +5,11 @@ import Text from '../elements/Text'
 import { MdGrade } from 'react-icons/md'
 import { BsHeart } from 'react-icons/bs'
 
+/**
+ * @author jinsung
+ * @param {*} props
+ * @returns 가로 카드형
+ */
 const RowCard = props => {
   const { info } = props
   return (

@@ -1,18 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { MdHome } from 'react-icons/md'
+import TooltipCard from './TooltipCard'
 
+/**
+ * @author jinsung
+ * @param {*} props
+ * @returns Marker
+ */
 const Marker = props => {
-  const { text, type } = props
+  const { text, type, info, isShow } = props
+  const [visible, setVisible] = useState(isShow)
+  const [isFocus, setIsFocus] = useState(false)
+
+  const handleClick = () => {
+    toggleIsFocus()
+    toggleTooltip()
+  }
+
+  const toggleIsFocus = () => {
+    setIsFocus(isFocus ? false : true)
+  }
+
+  const toggleTooltip = () => {
+    const toggleVisible = visible ? false : true
+    setVisible(toggleVisible)
+  }
 
   if (type === 'home') {
     return (
-      <div>
-        <HomeMarker>
-          <MdHome />
-        </HomeMarker>
-        {/* <img src="" alt="marker" width="60px" /> */}
-      </div>
+      <>
+        <MarkerArea>
+          <HomeMarker onClick={handleClick} isFocus={isFocus}>
+            <MdHome />
+          </HomeMarker>
+          {visible ? <TooltipCard /> : null}
+        </MarkerArea>
+      </>
     )
   }
 
@@ -30,7 +54,12 @@ const Marker = props => {
 Marker.defaultProps = {
   text: '₩217,747',
   type: 'price',
+  isShow: false,
 }
+const MarkerArea = styled.div`
+  position: relative;
+`
+
 const HomeMarker = styled.div`
   display: flex;
   justify-content: center;
@@ -38,8 +67,9 @@ const HomeMarker = styled.div`
   height: 32px;
   width: 32px;
   border-radius: 50%;
-  background-color: #ffffff;
-  color: rgb(34, 34, 34);
+  background-color: ${props => (props.isFocus ? 'rgb(34, 34, 34)' : '#fff')};
+  color: ${props => (props.isFocus ? '#fff' : 'rgb(34, 34, 34)')};
+  transform: ${props => (props.isFocus ? 'scale(1.3)' : '')};
   svg {
     font-size: 24px;
   }
