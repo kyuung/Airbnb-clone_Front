@@ -6,7 +6,6 @@ import { getRoomListDB } from '../redux/async/room'
 import Map from '../components/Map'
 import { BsFillMapFill } from 'react-icons/bs'
 import { GoListUnordered } from 'react-icons/go'
-import { IoIosArrowUp } from 'react-icons/io'
 import { IoIosArrowDown } from 'react-icons/io'
 import { BiFilter } from 'react-icons/bi'
 

@@ -8,6 +8,10 @@ import Stack from '@mui/material/Stack'
 import { getRoomListDB } from '../redux/async/room'
 import { useSelector, useDispatch } from 'react-redux'
 
+/**
+ * @author jinsung
+ * @returns 지역별 목록 리스트
+ */
 const ColumnList = () => {
   const dispatch = useDispatch()
   const roomList = useSelector(state => state.room.list)
@@ -59,15 +63,17 @@ const ColumnList = () => {
                 )
               })}
           </CardListArea>
-          <Stack spacing={2}>
-            <Pagination
-              count={15}
-              defaultPage={1}
-              siblingCount={1}
-              page={page}
-              onChange={handleChange}
-            />
-          </Stack>
+          <PaginationArea>
+            <Stack spacing={2}>
+              <Pagination
+                count={15}
+                defaultPage={1}
+                siblingCount={1}
+                page={page}
+                onChange={handleChange}
+              />
+            </Stack>
+          </PaginationArea>
         </RoomInfoArea>
         <MapArea>
           <Map roomList={roomList} type={false} />
@@ -89,7 +95,7 @@ const Contents = styled.div`
 const RoomInfoArea = styled.div`
   padding: 24px;
   @media (min-width: 1128px) {
-    width: 42vw;
+    width: 41vw;
     height: 100%;
   }
 `
@@ -118,5 +124,12 @@ const OptionButton = styled.button`
   padding: 8px 16px;
   font-size: 12px;
   margin-right: 8px;
+`
+
+const PaginationArea = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
 `
 export default ColumnList

@@ -1,18 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import GoogleMap from 'google-map-react'
 import Marker from '../components/Marker'
 
+/**
+ * @author jinsung
+ * @param {*} props
+ * @returns 구글맵 적용
+ */
 const Map = props => {
   const { roomList, zoom, type } = props
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggleOpen = () => {
-    setIsOpen(true)
-  }
-
-  const toggleClose = () => {
-    setIsOpen(false)
-  }
 
   return (
     <>
@@ -48,7 +44,12 @@ const Map = props => {
               {roomList.map((v, idx) => {
                 const location = v.location
                 return (
-                  <Marker lat={location.lat} lng={location.lon} type="home" />
+                  <Marker
+                    lat={location.lat}
+                    lng={location.lon}
+                    type="home"
+                    info={v}
+                  ></Marker>
                 )
               })}
             </GoogleMap>
