@@ -4,10 +4,12 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import Img from '../elements/Img';
 import Text from '../elements/Text';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Detail = () => {
-	// ! 0이면 체크인날짜선택, 1이면 체크아웃 날짜 선택, 2면 인원 선택, 3면 선택한 내용물이랑 예약하기 버튼
 	const [reserveStatus, setReserveStatus] = React.useState(0);
+	const [counter, setCounter] = React.useState(0);
 	const [initalDescription, setDescription] = React.useState('');
 	const [updateDescription, setUpdateDescription] = React.useState('');
 	const [checkInDate, setCheckInDate] = React.useState('');
@@ -32,6 +34,7 @@ const Detail = () => {
 
 	return (
 		<FlexCenter>
+			<Header />
 			<Section>
 				<ScrollX>
 					<ScrollXChild>
@@ -67,9 +70,11 @@ const Detail = () => {
 						/>
 					</ScrollXChild>
 				</ScrollX>
-				<h1>영덕 감성 산장</h1>
-				<Text bold="700">4.44 (후기 59개)</Text>
-				<Text>여기에 해당 숙소 위치 뿌리기</Text>
+				<h1>title</h1>
+				<Text bold="700">
+					<i className="fas fa-star"></i> 4.44 rating
+				</Text>
+				<Text>location 위치</Text>
 				<Hr />
 			</Section>
 			<Section>
@@ -203,59 +208,115 @@ const Detail = () => {
 				<Hr />
 			</Section>
 			<Section>
+				<Text
+					bold="700"
+					fontSize="2rem"
+					others="margin-top:1rem;margin-bottom:2rem;"
+				>
+					예약하기
+				</Text>
 				<ScrollX>
 					<ScrollXChild>
-						<Text
-							bold="700"
-							fontSize="1.6rem"
-							others="margin-top:1rem;margin-bottom:2rem;"
-						>
-							체크인 날짜를 선택해주세요.
-						</Text>
-						<Flex>
-							<DayPicker
-								format="DD/MM/YYYY"
-								onDayClick={(e) => {
-									let day = e.toLocaleDateString();
-									day = day.replaceAll('.', '-');
-									day = day.replaceAll(' ', '');
-									day = day.slice(0, 10);
-									if (day.slice(-1) === '-') {
-										day = day.slice(0, -1);
-									}
-									setCheckInDate(day);
-									console.log(checkInDate);
+						{reserveStatus === 0 && (
+							<Flex>
+								<Text
+									bold="700"
+									fontSize="1.6rem"
+									others="margin-top:1rem;margin-bottom:2rem;"
+								>
+									체크인 날짜를 선택해주세요
+								</Text>
+							</Flex>
+						)}
+						{reserveStatus === 1 && (
+							<Flex>
+								<Text
+									bold="700"
+									fontSize="1.6rem"
+									others="margin-top:1rem;margin-bottom:2rem;"
+								>
+									체크아웃 날짜를 선택해주세요
+								</Text>
+							</Flex>
+						)}
+						{reserveStatus < 2 && (
+							<Flex>
+								<DayPicker
+									format="DD/MM/YYYY"
+									onDayClick={(e) => {
+										let day = e.toLocaleDateString();
+
+										day = day.replaceAll(' ', '');
+										day = day.slice(0, 10);
+										if (day.slice(-1) === '-') {
+											day = day.slice(0, -1);
+										}
+										if (reserveStatus === 0) {
+											setCheckInDate(day);
+											setReserveStatus(1);
+										} else if (reserveStatus === 1) {
+											setCheckOutDate(day);
+											setReserveStatus(2);
+										}
+										console.log(checkInDate);
+										console.log(checkOutDate);
+									}}
+								/>
+							</Flex>
+						)}
+						{reserveStatus === 2 && (
+							<Flex
+								style={{
+									height: '14rem',
+									paddingTop: '3rem',
+									paddingBottom: '3rem',
+									justifyContent: 'space-between',
 								}}
-							/>
-						</Flex>
-					</ScrollXChild>
-					<ScrollXChild>
-						{/* {if(reserveStatus===0) {
-							return null
-						}} */}
-						<Text
-							bold="700"
-							fontSize="1.6rem"
-							others="margin-top:1rem;margin-bottom:2rem;"
-						>
-							체크아웃 날짜를 선택해주세요.
-						</Text>
-						<Flex>
-							<DayPicker
-								format="DD/MM/YYYY"
-								onDayClick={(e) => {
-									let day = e.toLocaleDateString();
-									day = day.replaceAll('.', '-');
-									day = day.replaceAll(' ', '');
-									day = day.slice(0, 10);
-									if (day.slice(-1) === '-') {
-										day = day.slice(0, -1);
-									}
-									setCheckOutDate(day);
-									console.log(checkOutDate);
-								}}
-							/>
-						</Flex>
+							>
+								<Text fontSize="1.2rem">
+									체크인 날짜 : {checkInDate}
+								</Text>
+								<Text fontSize="1.2rem">
+									체크아웃 : {checkOutDate}
+								</Text>
+								<Flex style={{ flexDirection: 'row' }}>
+									<Text fontSize="1.2rem">인원 수</Text>
+									<CounterBtn
+										onClick={() =>
+											counter > 0 &&
+											setCounter(counter - 1)
+										}
+									>
+										<Text fontSize="1.5rem">-</Text>
+									</CounterBtn>
+									<Text fontSize="1.6rem">{counter}</Text>
+									<CounterBtn
+										onClick={() => setCounter(counter + 1)}
+									>
+										<Text fontSize="1.5rem">+</Text>
+									</CounterBtn>
+								</Flex>
+								<Button
+									style={{
+										width: '18rem',
+										border: 'none',
+										fontSize: '1.3rem',
+									}}
+									onClick={() => {
+										if (counter === 0) {
+											window.alert(
+												'인원수를 입력해주세요.'
+											);
+											return;
+										}
+										window.alert('예약이 완료되었습니다.');
+										setReserveStatus(0);
+									}}
+								>
+									예약하기
+								</Button>
+							</Flex>
+						)}
 					</ScrollXChild>
 				</ScrollX>
 
@@ -327,7 +388,7 @@ const Detail = () => {
 };
 
 const Section = styled.section`
-	width: 80vw;
+	width: 60vw;
 	padding-left: 10rem;
 	padding-right: 10rem;
 `;
@@ -430,6 +491,19 @@ const UpdateInput = styled.input`
 const Flex = styled.div`
 	margin-left: 3rem;
 	margin-right: 3rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+const CounterBtn = styled.button`
+	width: 3rem;
+	height: 3rem;
+	border-radius: 3rem;
+	border: none;
+	margin-left: 1rem;
+	margin-right: 1rem;
 `;
 
 export default Detail;
