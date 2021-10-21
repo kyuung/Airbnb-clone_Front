@@ -1,7 +1,7 @@
 import api from '../api/index'
 
-const getRoomList = () => {
-  return api.get('roomListInfo?page=1')
+const getRoomList = params => {
+  return api.get(`api/rooms?${params}`)
 }
 
 const getDetailRoomList = () => {

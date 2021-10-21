@@ -41,7 +41,7 @@ const ColumnList = () => {
           </Section>
           <Section>
             <Text fontSize="14px" bold="400" color="rgb(113,113,133)">
-              여행 날짜와 게스트 인원수를 이볅하면 1박당 총 요금을 확인할 수
+              여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
               있습니다.
             </Text>
             <Text fontSize="14px" bold="400" color="#222">

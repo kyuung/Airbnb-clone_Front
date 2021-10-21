@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import GoogleMap from 'google-map-react'
 import Marker from '../components/Marker'
 
 const Map = props => {
   const { roomList, zoom, type } = props
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleOpen = () => {
+    setIsOpen(true)
+  }
+
+  const toggleClose = () => {
+    setIsOpen(false)
+  }
 
   return (
     <>

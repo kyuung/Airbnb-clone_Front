@@ -19,19 +19,7 @@ const InfinityList = () => {
   const roomList = useSelector(state => state.room.list)
   console.log('list', roomList)
   const [toggleStatus, setToggleStatus] = React.useState(true)
-  const categoryList = [
-    '트리하우스',
-    '캠핑카',
-    '멋진 수영장',
-    '객잔',
-    '화물 컨테이너',
-    '해변 근처',
-    '료칸',
-    '초소형 주택',
-    '섬',
-    '하우스보트',
-    '보트',
-  ]
+  const categoryList = ['멋진 수영장', '농장', '성', '해변 근처', '캠핑카']
 
   React.useEffect(() => {
     dispatch(getRoomListDB())

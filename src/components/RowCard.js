@@ -10,7 +10,12 @@ const RowCard = props => {
   return (
     <RowCardArea>
       <CardArea>
-        <Img bradius="1rem" width="18rem" height="12rem" src={info.imageUrl} />
+        <Img
+          bradius="1rem"
+          width="18rem"
+          height="12rem"
+          src={info.imageUrl[0]}
+        />
         <Section>
           <IconArea>
             <BsHeart />

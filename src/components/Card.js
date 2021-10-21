@@ -12,7 +12,7 @@ const Card = props => {
   return (
     <CardContentsArea>
       <CardArea {...styles}>
-        <ImgArea image_url={info.imageUrl}>
+        <ImgArea image_url={info.imageUrl[0]}>
           <IconArea>
             <BsHeart />
           </IconArea>
@@ -21,11 +21,11 @@ const Card = props => {
           <div>
             <span style={{ fontWeight: '600' }}>{info.locationName}</span>
           </div>
-          <div>{info.price} / 박</div>
+          <div>₩{info.price} / 박</div>
         </CardContentArea>
         <CardContentArea>
           <div>
-            <span style={{ color: '#979a9e' }}>{info.distance}거리</span>
+            <span style={{ color: '#979a9e' }}>{info.distance}km거리</span>
           </div>
           <div>
             <span style={{ color: '#979a9e' }}>{info.available}</span>
