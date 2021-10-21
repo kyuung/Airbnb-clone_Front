@@ -12,17 +12,17 @@ const MainHeader = () => {
 	const [checkOutDate, setCheckOutDate] = React.useState('');
 	const [counter, setCounter] = React.useState(0);
 
-	React.useEffect(() => {
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll); //clean up
-		};
-	}, []);
+	// React.useEffect(() => {
+	// 	window.addEventListener('scroll', handleScroll);
+	// 	return () => {
+	// 		window.removeEventListener('scroll', handleScroll); //clean up
+	// 	};
+	// }, []);
 
-	const handleScroll = (e) => {
-		console.log('scrolled');
-		console.log(e.target.scrollingElement.scrollHeight);
-	};
+	// const handleScroll = (e) => {
+	// 	console.log('scrolled');
+	// 	console.log(e.target.scrollingElement.scrollHeight);
+	// };
 
 	const readRooms = () => {
 		if (checkInDate === '' || checkOutDate === '' || counter === 0) {
