@@ -92,7 +92,7 @@ const InfinityList = () => {
         </>
       ) : (
         <>
-          <Map roomList={roomList} />
+          <Map roomList={roomList} type={true} />
         </>
       )}
       <ToggleBtn onClick={componentToggle}>
