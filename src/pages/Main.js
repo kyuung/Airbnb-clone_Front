@@ -9,17 +9,54 @@ import Text from '../elements/Text';
 import { history } from '../redux/configureStore';
 import InfoCovid from '../elements/InfoCovid';
 import MainHeader from '../components/MainHeader';
+import './style.css';
 
 const Main = () => {
+	const [scrollY, setScrollY] = React.useState(0);
+	const handleFollow = () => {
+		setScrollY(window.pageYOffset); // window 스크롤 값을 ScrollY에 저장
+	};
+	React.useEffect(() => {
+		scrollY > 30 && console.log('30');
+	}, [scrollY]);
+
+	React.useEffect(() => {
+		const watch = () => {
+			window.addEventListener('scroll', handleFollow);
+		};
+		watch(); // addEventListener 함수를 실행
+		return () => {
+			window.removeEventListener('scroll', handleFollow); // addEventListener 함수를 삭제
+		};
+	});
+
 	return (
 		<>
 			<InfoCovid />
 			{/* <Header /> */}
-			<MainHeader />
+			{scrollY < 50 ? (
+				<div className="main-headerAni">
+					<MainHeader />
+				</div>
+			) : (
+				<div
+					style={{
+						position: 'fixed',
+						top: 0,
+						backgroundColor: 'white',
+					}}
+					className="headerAni"
+				>
+					<Header />
+				</div>
+			)}
 			<section
 				style={{
 					width: '100vw',
 					height: '55rem',
+				}}
+				onScroll={(e) => {
+					console.log(e.target.scrollTop);
 				}}
 			>
 				<Img

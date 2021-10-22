@@ -46,6 +46,7 @@ const Header = (props) => {
 
 Header.defaultProps = {
 	type: 'basic',
+	others: '',
 };
 
 const FlexCenterR = styled.div`
