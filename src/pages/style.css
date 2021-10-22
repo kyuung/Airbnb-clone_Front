@@ -1,0 +1,18 @@
+.headerAni {
+	animation: ani 120ms ease-in-out;
+}
+
+.headerAni:hover {
+	cursor: pointer;
+}
+
+@keyframes ani {
+	from {
+		height: 0;
+		opacity: 0%;
+	}
+	to {
+		height: 80px;
+		opacity: 100%;
+	}
+}
