@@ -13,6 +13,7 @@ api.interceptors.request.use(async (config) => {
 	config.headers['Accept'] = '*/*';
 	/* getToken이 로컬 스토리지에 없다면 null 값을 반환 */
 	config.headers['authorization'] = await getToken();
+	console.log('<<', getToken());
 	return config;
 });
 
