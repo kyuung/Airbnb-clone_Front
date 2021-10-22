@@ -14,8 +14,8 @@ const reviewSlice = createSlice({
 
 	extraReducers: {
 		[createReviewDB.fulfilled]: (state, { payload }) => {
-			// state.detailRoom.list.room.review =
-			// 	state.detailRoom.list.room.review.push(payload.data);
+			state.detailRoom.list.room.review =
+				state.detailRoom.list.room.review.push(payload.data);
 			console.log('<<', payload.data);
 			state.isFetching = false;
 		},
