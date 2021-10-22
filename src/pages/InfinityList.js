@@ -19,6 +19,7 @@ import { setInitPagingReducer } from '../redux/modules/roomSlice'
 const InfinityList = () => {
   const dispatch = useDispatch()
   const roomList = useSelector(state => state.room.list)
+  console.log('list', roomList)
   const paging = useSelector(state => state.room.paging)
   const loading = useSelector(state => state.room.is_loading)
   const [toggleStatus, setToggleStatus] = React.useState(true)
