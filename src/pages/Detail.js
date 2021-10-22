@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDetailRoomListDB } from '../redux/async/detailRoom';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import Marker from '../components/Marker';
+import { createReviewDB, deleteReviewDB } from '../redux/async/review';
+import { getIdFromToken } from '../Shared/utils';
 
 const Detail = (props) => {
 	const dispatch = useDispatch();
@@ -26,7 +28,6 @@ const Detail = (props) => {
 	const detailList = useSelector((state) => state.detailRoom.list);
 	const roomList = detailList.room;
 	const reviewList = detailList.reviews;
-	console.log('reviewList', reviewList);
 
 	React.useEffect(() => {
 		dispatch(getDetailRoomListDB(post_id));
@@ -36,11 +37,8 @@ const Detail = (props) => {
 	const _lon = roomList?.location?.lon;
 
 	const submitReview = () => {
-		console.log(initalDescription, '리뷰 axios post 부분');
-	};
-
-	const deleteReview = () => {
-		console.log('리뷰 axios delete 부분');
+		const postReviewData = { initalDescription, post_id, rating: 4 };
+		dispatch(createReviewDB(postReviewData));
 	};
 
 	const updateReview = () => {
@@ -359,7 +357,9 @@ const Detail = (props) => {
 										{review?.userId.length > 6
 											? `${review?.userId.slice(0, 5)}...`
 											: review?.userId}{' '}
-										/ {review?.rating}
+										/ <i className="fas fa-star"></i>
+										<span> </span>
+										{review?.rating}
 									</Text>
 									<Text
 										bold="700"
@@ -381,7 +381,21 @@ const Detail = (props) => {
 									)}
 								</div>
 								<div style={{ width: '3rem' }}>
-									<OptionBtn onClick={deleteReview}>
+									<OptionBtn
+										onClick={() => {
+											const q =
+												window.confirm(
+													'리뷰를 삭제하시겠습니까 ? '
+												);
+											if (q) {
+												console.log(review._id);
+												dispatch(
+													deleteReviewDB(review._id)
+												);
+												console.log(getIdFromToken());
+											}
+										}}
+									>
 										X
 									</OptionBtn>
 									<OptionBtn onClick={updateReview}>
@@ -471,10 +485,6 @@ const ScrollX = styled.div`
 	scroll-snap-type: x mandatory;
 	grid-auto-flow: column;
 	overflow-x: auto;
-	-ms-overflow-style: none;
-	&::-webkit-scrollbar {
-		display: none;
-	}
 `;
 
 const ScrollXChild = styled.div`

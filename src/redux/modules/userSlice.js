@@ -17,6 +17,7 @@ const userSlice = createSlice({
 	extraReducers: {
 		[postUserLoginDB.fulfilled]: (state, { payload }) => {
 			if (payload.result) {
+				console.log(payload);
 				state.isLogin = true;
 				localStorage.setItem('token', payload.token);
 				window.alert('로그인을 완료하였습니다.');
