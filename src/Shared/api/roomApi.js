@@ -4,8 +4,8 @@ const getRoomList = params => {
   return api.get(`api/rooms?${params}`)
 }
 
-const getDetailRoomList = () => {
-  return api.get('roomInfo')
+const getDetailRoomList = params => {
+  return api.get(`roomInfo/${params}`)
 }
 
 export { getRoomList, getDetailRoomList }

@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import Text from '../elements/Text'
+import { postExistPhone, postSignUp } from '../Shared/api/userApi'
+import { postUserLoginDB } from '../redux/async/user'
+import { useDispatch } from 'react-redux'
 
 const SignModal = props => {
+  const dispatch = useDispatch()
   const phoneNum = /^[0-9]+$/
   const pwdNum = /^[0-9]+$/
   const nameChk = /^[가-힣a-zA-Z]+$/
@@ -26,7 +30,8 @@ const SignModal = props => {
   const [signUpPin, setSignUpPin] = React.useState('')
   const [signUpPin_chk, setSignUpPin_chk] = React.useState('')
 
-  const phoneConfirm = () => {
+  const phoneConfirm = async () => {
+    let userExist = false
     if (phoneNum.test(basicTel) === false) {
       window.alert('핸드폰 번호를 입력해주세요.')
       return
@@ -34,12 +39,17 @@ const SignModal = props => {
       window.alert('핸드폰 번호 11자를 입력해주세요.')
       return
     }
-    const test = window.confirm('true/false')
-    if (test) {
+    const payload = await postExistPhone({ phoneNum: basicTel }).catch(
+      e => e.reponse
+    )
+    if (payload) {
+      userExist = true
+    }
+    if (userExist) {
       // true : 로그인
       setSignInModal(true)
       setSignStatus(false)
-    } else if (!test) {
+    } else {
       // false : 회원가입
       setSignUpModal(true)
       setSignStatus(false)
@@ -47,18 +57,23 @@ const SignModal = props => {
   }
 
   const logIn = () => {
-    if (phoneNum.test(signInPhone) === false || signInPhone.length !== 11) {
-      window.alert('핸드폰 번호로 11자 입력해주세요.')
-      return
-    } else if (pwdNum.test(signInPin) === false || signInPin.length !== 6) {
+    // if (phoneNum.test(signInPhone) === false || signInPhone.length !== 11) {
+    //   window.alert('핸드폰 번호로 11자 입력해주세요.')
+    //   return
+    if (pwdNum.test(signInPin) === false || signInPin.length !== 6) {
       window.alert('핀번호는 숫자로 6자 입력해주세요.')
       return
     }
-    console.log(signInPin, signInPhone)
+    console.log(signInPin, basicTel)
+    const params = {
+      phoneNum: basicTel,
+      pinNum: signInPin,
+    }
+    dispatch(postUserLoginDB(params))
     setSignInModal(false)
   }
 
-  const signUp = () => {
+  const signUp = async () => {
     if (!nameChk.test(signUpName)) {
       window.alert('이름은 한글이나 영문으로 입력해주세요.')
       return
@@ -71,6 +86,22 @@ const SignModal = props => {
     } else if (signUpPin !== signUpPin_chk) {
       window.alert('핀번호와 핀번호 확인이 맞지 않습니다.')
       return
+    }
+    const params = {
+      email: signUpMail,
+      phoneNum: basicTel,
+      fullname: signUpName,
+      pinNum: signUpPin,
+      birthDt: '2021010',
+    }
+    const payload = await postSignUp(params).catch(e => {
+      window.alert(e.response.data.errorMessage)
+    })
+    console.log('payload', payload)
+    if (payload) {
+      window.alert('회원가입을 완료하였습니다.')
+      setSignUpModal(false)
+      setSignStatus(false)
     }
   }
 
@@ -105,16 +136,16 @@ const SignModal = props => {
           >
             X
           </XBtn>
-          <Text bold="700" fontSize="1.8rem" others="margin-bottom:3rem;">
+          <Text bold="700" fontSize="1.8rem" others="margin-bottom:1rem;">
             로그인
           </Text>
-          <Text bold="700" fontSize="1.2rem">
+          {/* <Text bold="700" fontSize="1.2rem">
             핸드폰 번호를 입력하세요.
           </Text>
           <Input
             maxLength="11"
             onChange={e => setSignInPhone(e.target.value)}
-          />
+          /> */}
           <Text bold="700" fontSize="1.2rem" others="margin-top:2rem;">
             핀 번호를 입력하세요.
           </Text>
