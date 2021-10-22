@@ -1,13 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getRoomList } from '../../Shared/api/roomApi'
-//import { history } from '../configureStore'
+import { postLogin } from '../../Shared/api/userApi'
 
-export const getRoomListDB = createAsyncThunk(
-  'room/getList',
+export const postUserLoginDB = createAsyncThunk(
+  'user/login',
   async (data, thunkAPI) => {
     try {
       const params = data
-      const response = await getRoomList(params)
+      console.log('params', params)
+      const response = await postLogin(params)
+      console.log('res', response)
       if (response) {
         return response.data
       }

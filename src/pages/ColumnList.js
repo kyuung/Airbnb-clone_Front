@@ -7,6 +7,8 @@ import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { getRoomListDB } from '../redux/async/room'
 import { useSelector, useDispatch } from 'react-redux'
+import Header from '../components/Header'
+import { setIsFocusReducer } from '../redux/modules/roomSlice'
 
 /**
  * @author jinsung
@@ -14,72 +16,87 @@ import { useSelector, useDispatch } from 'react-redux'
  */
 const ColumnList = () => {
   const dispatch = useDispatch()
-  const roomList = useSelector(state => state.room.list)
-  console.log('roomList', roomList)
+  const roomList = useSelector(state => state.room.pageList)
+  const paging = useSelector(state => state.room.paging)
   const [page, setPage] = React.useState(1)
   const handleChange = (event, value) => {
+    const params = `page=${value}`
+    dispatch(getRoomListDB(params))
     setPage(value)
+    window.scrollTo(0, 0)
   }
 
   React.useEffect(() => {
-    dispatch(getRoomListDB())
+    dispatch(getRoomListDB('page=1'))
   }, [])
+
+  const _handleOut = () => {
+    dispatch(setIsFocusReducer(false))
+  }
   return (
-    <FlexContent>
-      <Contents>
-        <RoomInfoArea>
-          <Section>
-            <Text fontSize="14px" color="#222">
-              300개 이상의 숙소
-            </Text>
-            <Text fontSize="32px" bold="800" color="#222">
-              서울의 숙소
-            </Text>
-          </Section>
-          <Section>
-            <OptionButton>취소 수수료 없음</OptionButton>
-            <OptionButton>숙소 유형</OptionButton>
-            <OptionButton>요금</OptionButton>
-            <OptionButton>즉시 예약</OptionButton>
-            <OptionButton>필터 추가하기</OptionButton>
-          </Section>
-          <Section>
-            <Text fontSize="14px" bold="400" color="rgb(113,113,133)">
-              여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
-              있습니다.
-            </Text>
-            <Text fontSize="14px" bold="400" color="#222">
-              예약하기 전에 코로나19 관련 여행 제한 사항을 확인하세요.자세히
-              알아보기
-            </Text>
-          </Section>
-          <CardListArea>
-            {roomList.length > 0 &&
-              roomList.map((info, idx) => {
-                return (
-                  <React.Fragment key={idx}>
-                    <RowCard info={info} />
-                  </React.Fragment>
-                )
-              })}
-          </CardListArea>
-          <PaginationArea>
-            <Stack spacing={2}>
-              <Pagination
-                count={15}
-                defaultPage={1}
-                siblingCount={1}
-                page={page}
-                onChange={handleChange}
-              />
-            </Stack>
-          </PaginationArea>
-        </RoomInfoArea>
-        <MapArea>
-          <Map roomList={roomList} type={false} />
-        </MapArea>
-      </Contents>
-    </FlexContent>
+    <>
+      <Header />
+      <FlexContent>
+        <Contents>
+          <RoomInfoArea>
+            <Section>
+              <Text fontSize="14px" color="#222">
+                300개 이상의 숙소
+              </Text>
+              <Text fontSize="32px" bold="800" color="#222">
+                서울의 숙소
+              </Text>
+            </Section>
+            <Section>
+              <OptionButton>취소 수수료 없음</OptionButton>
+              <OptionButton>숙소 유형</OptionButton>
+              <OptionButton>요금</OptionButton>
+              <OptionButton>즉시 예약</OptionButton>
+              <OptionButton>필터 추가하기</OptionButton>
+            </Section>
+            <Section onMouseEnter={_handleOut}>
+              <Text
+                fontSize="14px"
+                bold="400"
+                color="rgb(113,113,133)"
+                margin="0 0 10px 0"
+              >
+                여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수
+                있습니다.
+              </Text>
+              <Text fontSize="14px" bold="400" color="#222">
+                예약하기 전에 코로나19 관련 여행 제한 사항을 확인하세요.자세히
+                알아보기
+              </Text>
+            </Section>
+            <CardListArea>
+              {roomList.length > 0 &&
+                roomList.map((info, idx) => {
+                  return (
+                    <React.Fragment key={idx}>
+                      <RowCard info={info} />
+                    </React.Fragment>
+                  )
+                })}
+            </CardListArea>
+            <PaginationArea onMouseEnter={_handleOut}>
+              <Stack spacing={2}>
+                <Pagination
+                  count={paging.totalPage}
+                  defaultPage={1}
+                  siblingCount={1}
+                  page={page}
+                  onChange={handleChange}
+                />
+              </Stack>
+            </PaginationArea>
+          </RoomInfoArea>
+          <MapArea onMouseEnter={_handleOut}>
+            <Map roomList={roomList} type={false} />
+          </MapArea>
+        </Contents>
+      </FlexContent>
+    </>
   )
 }
 
@@ -104,12 +121,15 @@ const Section = styled.div`
   margin-bottom: 24px;
 `
 
-const CardListArea = styled.div``
+const CardListArea = styled.div`
+  height: 100%;
+`
 
 const MapArea = styled.div`
   background-color: royalblue;
   @media (min-width: 1128px) {
     position: fixed;
+    top: 0;
     right: 0;
     width: 56vw;
     height: 100%;

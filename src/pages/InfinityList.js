@@ -8,6 +8,9 @@ import { BsFillMapFill } from 'react-icons/bs'
 import { GoListUnordered } from 'react-icons/go'
 import { IoIosArrowDown } from 'react-icons/io'
 import { BiFilter } from 'react-icons/bi'
+import InfinityScroll from '../components/InfinityScroll'
+import Header from '../components/Header'
+import { setInitPagingReducer } from '../redux/modules/roomSlice'
 
 /**
  * @author jinsung
@@ -16,12 +19,19 @@ import { BiFilter } from 'react-icons/bi'
 const InfinityList = () => {
   const dispatch = useDispatch()
   const roomList = useSelector(state => state.room.list)
-  console.log('list', roomList)
+  const paging = useSelector(state => state.room.paging)
+  const loading = useSelector(state => state.room.is_loading)
   const [toggleStatus, setToggleStatus] = React.useState(true)
   const categoryList = ['멋진 수영장', '농장', '성', '해변 근처', '캠핑카']
 
   React.useEffect(() => {
-    dispatch(getRoomListDB())
+    if (roomList.length === 0) {
+      dispatch(getRoomListDB('page=1'))
+    }
+    return () => {
+      console.log('clean up')
+      dispatch(setInitPagingReducer())
+    }
   }, [])
 
   const componentToggle = () => {
@@ -30,9 +40,15 @@ const InfinityList = () => {
     componentStatus ? setToggleStatus(false) : setToggleStatus(true)
   }
 
+  const callNext = () => {
+    const _page = paging.page + 1
+    const param = `page=${_page}`
+    dispatch(getRoomListDB(param))
+  }
+
   return (
     <>
-      <h2>Air Bnb InfinityList</h2>
+      <Header />
       {/* 카테고리 영역 */}
       <NavArea>
         <Nav>
@@ -77,6 +93,11 @@ const InfinityList = () => {
                   )
                 })}
             </CardListArea>
+            <InfinityScroll
+              callNext={callNext}
+              loading={loading}
+              is_next={paging.page < paging.totalPage ? true : false}
+            />
           </CardContentsArea>
         </>
       ) : (

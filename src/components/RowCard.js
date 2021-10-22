@@ -4,6 +4,11 @@ import Img from '../elements/Img'
 import Text from '../elements/Text'
 import { MdGrade } from 'react-icons/md'
 import { BsHeart } from 'react-icons/bs'
+import { useDispatch } from 'react-redux'
+import {
+  setFocusIdReducer,
+  setIsFocusReducer,
+} from '../redux/modules/roomSlice'
 
 /**
  * @author jinsung
@@ -11,9 +16,32 @@ import { BsHeart } from 'react-icons/bs'
  * @returns 가로 카드형
  */
 const RowCard = props => {
+  const dispatch = useDispatch()
   const { info } = props
+  const [isHover, SetIsHover] = React.useState(false)
+
+  /* Foucs Id 지정 */
+  const _handleHover = () => {
+    if (isHover) {
+      dispatch(setIsFocusReducer(true))
+      dispatch(setFocusIdReducer(info._id))
+    }
+  }
+
+  const _handleInner = () => {
+    SetIsHover(true)
+  }
+
+  const _handleOut = () => {
+    SetIsHover(false)
+  }
+
   return (
-    <RowCardArea>
+    <RowCardArea
+      onMouseOver={_handleHover}
+      onMouseEnter={_handleInner}
+      onMouseOut={_handleOut}
+    >
       <CardArea>
         <Img
           bradius="1rem"
@@ -51,6 +79,7 @@ const RowCardArea = styled.div`
   height: 100%;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  cursor: pointer;
 `
 
 const CardArea = styled.div`
