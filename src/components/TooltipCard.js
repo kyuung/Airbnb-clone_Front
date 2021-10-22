@@ -31,7 +31,7 @@ const TooltipCard = props => {
             4.98
           </Text>
           <Text fontSize="14px" color="#b2b5be">
-            (99)
+            (2)
           </Text>
         </Content>
         <Content>

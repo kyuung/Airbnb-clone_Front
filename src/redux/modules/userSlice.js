@@ -17,7 +17,6 @@ const userSlice = createSlice({
         localStorage.setItem('token', payload.token)
         window.alert('로그인을 완료하였습니다.')
       }
-      console.log(payload)
     },
     [postUserLoginDB.pending]: (state, { payload }) => {
       state.isFetching = true

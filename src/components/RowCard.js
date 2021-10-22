@@ -5,6 +5,7 @@ import Text from '../elements/Text'
 import { MdGrade } from 'react-icons/md'
 import { BsHeart } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   setFocusIdReducer,
   setIsFocusReducer,
@@ -37,40 +38,42 @@ const RowCard = props => {
   }
 
   return (
-    <RowCardArea
-      onMouseOver={_handleHover}
-      onMouseEnter={_handleInner}
-      onMouseOut={_handleOut}
-    >
-      <CardArea>
-        <Img
-          bradius="1rem"
-          width="18rem"
-          height="12rem"
-          src={info.imageUrl[0]}
-        />
-        <Section>
-          <IconArea>
-            <BsHeart />
-          </IconArea>
-          <SubContent>{info.locationName}</SubContent>
-          <Content>{info.title}</Content>
-          <Hr />
-          <SubContent>
-            최대 인원 {info.people}명 · 침실 2개 · 침대 {info.people}개 · 욕실
-            1개
-          </SubContent>
-          <SubContent>주방 · 에어컨 · 무선 인터넷 · 헤어드라이어</SubContent>
-          <GradArea>
-            <Grad>
-              <MdGrade />
-              <Text color="#000">{info.rating}</Text>
-              <Text color="gray">(후기 12개)</Text>
-            </Grad>
-          </GradArea>
-        </Section>
-      </CardArea>
-    </RowCardArea>
+    <Link to={`/rooms/${info._id}`}>
+      <RowCardArea
+        onMouseOver={_handleHover}
+        onMouseEnter={_handleInner}
+        onMouseOut={_handleOut}
+      >
+        <CardArea>
+          <Img
+            bradius="1rem"
+            width="18rem"
+            height="200px"
+            src={info.imageUrl[0]}
+          />
+          <Section>
+            <IconArea>
+              <BsHeart />
+            </IconArea>
+            <SubContent>{info.locationName}</SubContent>
+            <Content>{info.title}</Content>
+            <Hr />
+            <SubContent>
+              최대 인원 {info.people}명 · 침실 2개 · 침대 {info.people}개 · 욕실
+              1개
+            </SubContent>
+            <SubContent>주방 · 에어컨 · 무선 인터넷 · 헤어드라이어</SubContent>
+            <GradArea>
+              <Grad>
+                <MdGrade />
+                <Text color="#000">{info.rating}</Text>
+                <Text color="gray">(후기 2개)</Text>
+              </Grad>
+            </GradArea>
+          </Section>
+        </CardArea>
+      </RowCardArea>
+    </Link>
   )
 }
 
@@ -96,13 +99,16 @@ const Section = styled.div`
   flex-grow: 1;
   height: 200px;
   margin-left: 16px;
+  width: 200px;
 `
 const Content = styled.div`
+  width: 100%;
   font-size: 18px;
   color: #222222;
 `
 
 const SubContent = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: 2px;

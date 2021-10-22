@@ -20,7 +20,6 @@ const detailRoomSlice = createSlice({
   extraReducers: {
     [getDetailRoomListDB.fulfilled]: (state, { payload }) => {
       state.list = payload.data
-      console.log(payload.data)
       state.isFetching = false
     },
     [getDetailRoomListDB.pending]: (state, { payload }) => {

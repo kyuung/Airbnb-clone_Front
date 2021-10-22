@@ -6,9 +6,7 @@ export const postUserLoginDB = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const params = data
-      console.log('params', params)
       const response = await postLogin(params)
-      console.log('res', response)
       if (response) {
         return response.data
       }

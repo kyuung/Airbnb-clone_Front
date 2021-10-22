@@ -14,7 +14,9 @@ import { setIsFocusReducer } from '../redux/modules/roomSlice'
  * @author jinsung
  * @returns 지역별 목록 리스트
  */
-const ColumnList = () => {
+const ColumnList = props => {
+  console.log('props', props)
+  const categoryNm = decodeURIComponent(props.location.search.substr(10))
   const dispatch = useDispatch()
   const roomList = useSelector(state => state.room.pageList)
   const paging = useSelector(state => state.room.paging)
@@ -27,7 +29,8 @@ const ColumnList = () => {
   }
 
   React.useEffect(() => {
-    dispatch(getRoomListDB('page=1'))
+    const params = `page=1&category=${categoryNm}`
+    dispatch(getRoomListDB(params))
   }, [])
 
   const _handleOut = () => {
@@ -44,7 +47,7 @@ const ColumnList = () => {
                 300개 이상의 숙소
               </Text>
               <Text fontSize="32px" bold="800" color="#222">
-                서울의 숙소
+                {categoryNm}의 숙소
               </Text>
             </Section>
             <Section>
@@ -70,26 +73,42 @@ const ColumnList = () => {
               </Text>
             </Section>
             <CardListArea>
-              {roomList.length > 0 &&
-                roomList.map((info, idx) => {
-                  return (
-                    <React.Fragment key={idx}>
-                      <RowCard info={info} />
-                    </React.Fragment>
-                  )
-                })}
+              <>
+                {roomList.length > 0 &&
+                  roomList.map((info, idx) => {
+                    return (
+                      <React.Fragment key={idx}>
+                        <RowCard info={info} />
+                      </React.Fragment>
+                    )
+                  })}
+              </>
             </CardListArea>
-            <PaginationArea onMouseEnter={_handleOut}>
-              <Stack spacing={2}>
-                <Pagination
-                  count={paging.totalPage}
-                  defaultPage={1}
-                  siblingCount={1}
-                  page={page}
-                  onChange={handleChange}
-                />
-              </Stack>
-            </PaginationArea>
+            {roomList.length > 0 ? (
+              <PaginationArea onMouseEnter={_handleOut}>
+                <Stack spacing={2}>
+                  <Pagination
+                    count={paging.totalPage}
+                    defaultPage={1}
+                    siblingCount={1}
+                    page={page}
+                    onChange={handleChange}
+                  />
+                </Stack>
+              </PaginationArea>
+            ) : (
+              <>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '100%',
+                  }}
+                >
+                  <Text>숙소 정보가 없습니다.</Text>
+                </div>
+              </>
+            )}
           </RoomInfoArea>
           <MapArea onMouseEnter={_handleOut}>
             <Map roomList={roomList} type={false} />

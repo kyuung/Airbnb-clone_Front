@@ -29,7 +29,6 @@ const InfinityList = () => {
       dispatch(getRoomListDB('page=1'))
     }
     return () => {
-      console.log('clean up')
       dispatch(setInitPagingReducer())
     }
   }, [])
