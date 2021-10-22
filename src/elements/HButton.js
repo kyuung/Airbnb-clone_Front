@@ -1,10 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import SignModal from '../components/SignModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { userReducer } from '../redux/modules/userSlice';
 
 const HButton = () => {
+	const dispatch = useDispatch();
+	const is_login = useSelector((state) => state.user);
+
 	const [basicModalStatus, setBasicModalStauts] = React.useState(false);
 	const [sign, setSign] = React.useState(false);
+
+	const logOut = () => {
+		localStorage.removeItem('token');
+		window.alert('로그아웃 되었습니다.');
+		dispatch(userReducer(false));
+	};
+
 	return (
 		<div>
 			<Container
@@ -17,24 +29,36 @@ const HButton = () => {
 				<I className="fas fa-grip-lines"></I>
 				<I className="fas fa-user-circle"></I>
 			</Container>
-			{basicModalStatus && (
-				<UserModal>
-					<UserModalBtn
-						onClick={() => {
-							sign ? setSign(false) : setSign(true);
-						}}
-					>
-						회원가입
-					</UserModalBtn>
-					<UserModalBtn
-						onClick={() => {
-							sign ? setSign(false) : setSign(true);
-						}}
-					>
-						로그인
-					</UserModalBtn>
-				</UserModal>
-			)}
+			{basicModalStatus &&
+				(is_login.isLogin ? (
+					<div>
+						<UserModal>
+							<UserModalBtn onClick={logOut}>
+								로그아웃
+							</UserModalBtn>
+							<UserModalBtn>
+								<i className="fab fa-airbnb"></i>
+							</UserModalBtn>
+						</UserModal>
+					</div>
+				) : (
+					<UserModal>
+						<UserModalBtn
+							onClick={() => {
+								sign ? setSign(false) : setSign(true);
+							}}
+						>
+							회원가입
+						</UserModalBtn>
+						<UserModalBtn
+							onClick={() => {
+								sign ? setSign(false) : setSign(true);
+							}}
+						>
+							로그인
+						</UserModalBtn>
+					</UserModal>
+				))}
 			{sign && <SignModal _signStatus={true} />}
 		</div>
 	);
