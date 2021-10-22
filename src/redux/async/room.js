@@ -6,9 +6,8 @@ export const getRoomListDB = createAsyncThunk(
   'room/getList',
   async (data, thunkAPI) => {
     try {
-      const params = 'page=1'
+      const params = data
       const response = await getRoomList(params)
-      console.log('response', response)
       if (response) {
         return response.data
       }

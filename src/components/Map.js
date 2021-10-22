@@ -27,6 +27,7 @@ const Map = props => {
                     lat={location.lat}
                     lng={location.lon}
                     text={`₩${v.price}`}
+                    info={v}
                   />
                 )
               })}

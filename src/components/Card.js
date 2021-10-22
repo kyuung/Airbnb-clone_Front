@@ -46,6 +46,7 @@ const CardContentsArea = styled.div`
   grid-template-columns: 100%;
   isolation: isolate;
   box-sizing: border-box;
+  cursor: pointer;
 `
 const ImgArea = styled.div`
   background-image: url('${props => props.image_url}');
