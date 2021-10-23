@@ -4,22 +4,41 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import Img from '../elements/Img';
 import Text from '../elements/Text';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDetailRoomListDB } from '../redux/async/detailRoom';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import Marker from '../components/Marker';
+import { createReviewDB, deleteReviewDB } from '../redux/async/review';
+import { getIdFromToken } from '../Shared/utils';
 
-const Detail = () => {
-	// ! 0이면 체크인날짜선택, 1이면 체크아웃 날짜 선택, 2면 인원 선택, 3면 선택한 내용물이랑 예약하기 버튼
+const Detail = (props) => {
+	const dispatch = useDispatch();
+	const post_id = props.match.params.id;
+
 	const [reserveStatus, setReserveStatus] = React.useState(0);
+	const [counter, setCounter] = React.useState(0);
 	const [initalDescription, setDescription] = React.useState('');
 	const [updateDescription, setUpdateDescription] = React.useState('');
 	const [checkInDate, setCheckInDate] = React.useState('');
 	const [checkOutDate, setCheckOutDate] = React.useState('');
 	const [reviewState, setReviewState] = React.useState(false);
 
-	const submitReview = () => {
-		console.log(initalDescription, '리뷰 axios post 부분');
-	};
+	const detailList = useSelector((state) => state.detailRoom.list);
+	const roomList = detailList.room;
+	const reviewList = detailList.reviews;
 
-	const deleteReview = () => {
-		console.log('리뷰 axios delete 부분');
+	React.useEffect(() => {
+		dispatch(getDetailRoomListDB(post_id));
+	}, []);
+
+	const _lat = roomList?.location?.lat;
+	const _lon = roomList?.location?.lon;
+
+	const submitReview = () => {
+		const postReviewData = { initalDescription, post_id, rating: 4 };
+		dispatch(createReviewDB(postReviewData));
 	};
 
 	const updateReview = () => {
@@ -32,90 +51,76 @@ const Detail = () => {
 
 	return (
 		<FlexCenter>
-			<Section>
+			<Header />
+			<Section style={{ marginTop: '2rem' }}>
 				<ScrollX>
-					<ScrollXChild>
-						<Img
-							width="20rem"
-							height="18rem"
-							bradius="20px"
-							others="margin-top:1rem"
-						/>
-					</ScrollXChild>
-					<ScrollXChild>
-						<Img
-							width="20rem"
-							height="18rem"
-							bradius="20px"
-							others="margin-top:1rem"
-						/>
-					</ScrollXChild>
-					<ScrollXChild>
-						<Img
-							width="20rem"
-							height="18rem"
-							bradius="20px"
-							others="margin-top:1rem"
-						/>
-					</ScrollXChild>
-					<ScrollXChild>
-						<Img
-							width="20rem"
-							height="18rem"
-							bradius="20px"
-							others="margin-top:1rem"
-						/>
-					</ScrollXChild>
+					<ScrollX>
+						{roomList?.imageUrl.map((img, idx) => (
+							<ScrollXChild key={idx}>
+								<Img
+									bradius="20px"
+									others="margin-bottom:1rem"
+									src={img}
+								/>
+							</ScrollXChild>
+						))}
+					</ScrollX>
 				</ScrollX>
-				<h1>영덕 감성 산장</h1>
-				<Text bold="700">4.44 (후기 59개)</Text>
-				<Text>여기에 해당 숙소 위치 뿌리기</Text>
+				<h1>{roomList?.host}</h1>
+				<Text bold="700">
+					<i className="fas fa-star"></i> {roomList?.rating}
+				</Text>
+				<Text others="margin-top:0.7rem;">
+					{roomList?.locationName}
+				</Text>
 				<Hr />
 			</Section>
 			<Section>
-				<h2>오두막</h2>
-				<h2>호스트 : 현수님</h2>
-				<Text>최대 인원 4명 / 침실 2개 / 침대 3개 / 욕실 2개</Text>
+				<h2>{roomList?.category}</h2>
+				<h2>
+					호스트 :{' '}
+					{roomList?.host.split('이 호스팅하는 주거용 공간 전체')}
+				</h2>
+				<Text>
+					<i className="fas fa-user-friends"></i>
+					<span> </span>최대 인원
+					{roomList?.people}명 / <i className="fas fa-bed"></i>
+					<span> </span>침실 {roomList?.people}개
+				</Text>
 				<Hr />
 			</Section>
 			<Section>
 				<div>
 					<h2>
-						<i className="fas fa-home"></i> 집 전체
+						<i className="fas fa-home"></i> {roomList?.category}{' '}
+						전체
 					</h2>
-					<Text others="margin-left:1.5rem">
-						오두막 전체를 단독으로 사용하게 됩니다.
-					</Text>
 				</div>
 				<div>
 					<h2>
 						<i className="fas fa-key"></i> 순조로운 체크인 과정
 					</h2>
 					<Text others="margin-left:1.5rem">
-						최근 숙박한 게스트 중 90%가 체크인 과정에 별점 5점을 준
-						숙소입니다.
+						최근 숙박한 게스트 중 90%가 체크인 과정에 별점{' '}
+						{roomList?.rating}
+						점을 준 숙소입니다.
 					</Text>
 				</div>
 				<div>
 					<h2>
-						<i className="far fa-bookmark"></i> 반려동물 입실 가능
+						<i className="far fa-bookmark"></i> 숙소 이용 규칙
 					</h2>
 					<Text others="margin-left:1.5rem">
-						게스트가 자주 찾는 편의시설
+						{roomList?.pet ? '반려동물 가능' : '반려동물 불가능'}
+					</Text>
+					<Text others="margin-left:1.5rem;margin-top:1rem">
+						{roomList?.smoking ? '흡연 가능' : '흡연 불가능'}
 					</Text>
 				</div>
 				<Hr />
 			</Section>
-			<Section>
-				<Text>
-					동해바다 뭐시기 인포메이션동해바다 뭐시기 인포메이션
-					동해바다 뭐시기 인포메이션 동해바다 뭐시기 인포메이션
-					동해바다 뭐시기 인포메이션 동해바다 뭐시기 인포메이션
-					동해바다 뭐시기 인포메이션 동해바다 뭐시기 인포메이션
-					동해바다 뭐시기 인포메이션
-				</Text>
-				<Hr />
-			</Section>
+
+			<Section></Section>
 			<Section>
 				<Text
 					bold="700"
@@ -124,32 +129,21 @@ const Detail = () => {
 				>
 					숙박 장소
 				</Text>
+				<Text others="margin-bottom:2rem;">
+					{roomList?.description}
+				</Text>
+
 				<div>
 					<ScrollX>
-						<ScrollXChild>
-							<Img bradius="20px" others="margin-bottom:1rem" />
-							<Text>
-								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
-							</Text>
-						</ScrollXChild>
-						<ScrollXChild>
-							<Img bradius="20px" others="margin-bottom:1rem" />
-							<Text>
-								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
-							</Text>
-						</ScrollXChild>
-						<ScrollXChild>
-							<Img bradius="20px" others="margin-bottom:1rem" />
-							<Text>
-								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
-							</Text>
-						</ScrollXChild>
-						<ScrollXChild>
-							<Img bradius="20px" others="margin-bottom:1rem" />
-							<Text>
-								퀸 사이즈 침대 1개, 에어 메트리스 뭐시기
-							</Text>
-						</ScrollXChild>
+						{roomList?.imageUrl.map((img, idx) => (
+							<ScrollXChild key={idx}>
+								<Img
+									bradius="20px"
+									others="margin-bottom:1rem"
+									src={img}
+								/>
+							</ScrollXChild>
+						))}
 					</ScrollX>
 				</div>
 				<Hr />
@@ -198,64 +192,135 @@ const Detail = () => {
 				>
 					호스팅 지역
 				</Text>
-				<div>지도를 넣을 곳입니다.</div>
-				<Text>여기에 해당 숙소 위치 뿌리기</Text>
+				<Section>
+					<LoadScript
+						googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_KEY}
+					>
+						<GoogleMap
+							mapContainerStyle={{
+								width: '400px',
+								height: '400px',
+							}}
+							center={{
+								lat: _lat,
+								lng: _lon,
+							}}
+							zoom={10}
+						/>
+					</LoadScript>
+				</Section>
 				<Hr />
 			</Section>
 			<Section>
+				<Text
+					bold="700"
+					fontSize="2rem"
+					others="margin-top:1rem;margin-bottom:2rem;"
+				>
+					예약하기 : 1박에 {roomList?.price}원
+				</Text>
 				<ScrollX>
 					<ScrollXChild>
-						<Text
-							bold="700"
-							fontSize="1.6rem"
-							others="margin-top:1rem;margin-bottom:2rem;"
-						>
-							체크인 날짜를 선택해주세요.
-						</Text>
-						<Flex>
-							<DayPicker
-								format="DD/MM/YYYY"
-								onDayClick={(e) => {
-									let day = e.toLocaleDateString();
-									day = day.replaceAll('.', '-');
-									day = day.replaceAll(' ', '');
-									day = day.slice(0, 10);
-									if (day.slice(-1) === '-') {
-										day = day.slice(0, -1);
-									}
-									setCheckInDate(day);
-									console.log(checkInDate);
+						{reserveStatus === 0 && (
+							<Flex>
+								<Text
+									bold="700"
+									fontSize="1.6rem"
+									others="margin-top:1rem;margin-bottom:2rem;"
+								>
+									체크인 날짜를 선택해주세요
+								</Text>
+							</Flex>
+						)}
+						{reserveStatus === 1 && (
+							<Flex>
+								<Text
+									bold="700"
+									fontSize="1.6rem"
+									others="margin-top:1rem;margin-bottom:2rem;"
+								>
+									체크아웃 날짜를 선택해주세요
+								</Text>
+							</Flex>
+						)}
+						{reserveStatus < 2 && (
+							<Flex>
+								<DayPicker
+									format="DD/MM/YYYY"
+									onDayClick={(e) => {
+										let day = e.toLocaleDateString();
+
+										day = day.replaceAll(' ', '');
+										day = day.slice(0, 10);
+										if (day.slice(-1) === '-') {
+											day = day.slice(0, -1);
+										}
+										if (reserveStatus === 0) {
+											setCheckInDate(day);
+											setReserveStatus(1);
+										} else if (reserveStatus === 1) {
+											setCheckOutDate(day);
+											setReserveStatus(2);
+										}
+										console.log(checkInDate);
+										console.log(checkOutDate);
+									}}
+								/>
+							</Flex>
+						)}
+						{reserveStatus === 2 && (
+							<Flex
+								style={{
+									height: '14rem',
+									paddingTop: '3rem',
+									paddingBottom: '3rem',
+									justifyContent: 'space-between',
 								}}
-							/>
-						</Flex>
-					</ScrollXChild>
-					<ScrollXChild>
-						{/* {if(reserveStatus===0) {
-							return null
-						}} */}
-						<Text
-							bold="700"
-							fontSize="1.6rem"
-							others="margin-top:1rem;margin-bottom:2rem;"
-						>
-							체크아웃 날짜를 선택해주세요.
-						</Text>
-						<Flex>
-							<DayPicker
-								format="DD/MM/YYYY"
-								onDayClick={(e) => {
-									let day = e.toLocaleDateString();
-									day = day.replaceAll('.', '-');
-									day = day.replaceAll(' ', '');
-									day = day.slice(0, 10);
-									if (day.slice(-1) === '-') {
-										day = day.slice(0, -1);
-									}
-									setCheckOutDate(day);
-									console.log(checkOutDate);
-								}}
-							/>
-						</Flex>
+							>
+								<Text fontSize="1.2rem">
+									체크인 날짜 : {checkInDate}
+								</Text>
+								<Text fontSize="1.2rem">
+									체크아웃 : {checkOutDate}
+								</Text>
+								<Flex style={{ flexDirection: 'row' }}>
+									<Text fontSize="1.2rem">인원 수</Text>
+									<CounterBtn
+										onClick={() =>
+											counter > 0 &&
+											setCounter(counter - 1)
+										}
+									>
+										<Text fontSize="1.5rem">-</Text>
+									</CounterBtn>
+									<Text fontSize="1.6rem">{counter}</Text>
+									<CounterBtn
+										onClick={() => setCounter(counter + 1)}
+									>
+										<Text fontSize="1.5rem">+</Text>
+									</CounterBtn>
+								</Flex>
+								<Button
+									style={{
+										width: '18rem',
+										border: 'none',
+										fontSize: '1.3rem',
+									}}
+									onClick={() => {
+										if (counter === 0) {
+											window.alert(
+												'인원수를 입력해주세요.'
+											);
+											return;
+										}
+										window.alert('예약이 완료되었습니다.');
+										setReserveStatus(0);
+									}}
+								>
+									예약하기
+								</Button>
+							</Flex>
+						)}
 					</ScrollXChild>
 				</ScrollX>
 
@@ -267,50 +332,79 @@ const Detail = () => {
 					fontSize="2rem"
 					others="margin-top:1rem;margin-bottom:2rem;"
 				>
-					4.44 / 후기 0개
+					<i className="fas fa-star" style={{ color: '#FF385C' }}></i>{' '}
+					<span> </span>
+					{roomList?.rating} / 후기 {reviewList?.length}개
 				</Text>
 				<ScrollX>
-					<ReviewBox>
-						<div
-							style={{
-								display: 'flex',
-								justifyContent: 'space-between',
-								alignItems: 'flex-start',
-							}}
-						>
-							<div>
-								<Text
-									bold="700"
-									fontSize="1rem"
-									others="margin-top:0.5rem; margin-bottom: 1rem;"
-								>
-									리뷰 작성자 뿌리는곳
-								</Text>
-								<Text
-									bold="700"
-									fontSize="1rem"
-									others="margin-bottom:1rem"
-								>
-									리뷰 단 시간 뿌리는곳
-								</Text>
-								{reviewState ? (
-									<UpdateInput
-										onChange={(e) =>
-											setUpdateDescription(e.target.value)
-										}
-									/>
-								) : (
-									<Text>리뷰 내용 뿌리는곳</Text>
-								)}
+					{reviewList?.map((review, idx) => (
+						<ReviewBox key={idx}>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'flex-start',
+								}}
+							>
+								<div>
+									<Text
+										bold="700"
+										fontSize="1rem"
+										others="margin-top:0.5rem; margin-bottom: 1rem;width:10rem;"
+									>
+										<i className="fas fa-user"></i>{' '}
+										<span> </span>
+										{review?.userId.length > 6
+											? `${review?.userId.slice(0, 5)}...`
+											: review?.userId}{' '}
+										/ <i className="fas fa-star"></i>
+										<span> </span>
+										{review?.rating}
+									</Text>
+									<Text
+										bold="700"
+										fontSize="1rem"
+										others="margin-bottom:1rem"
+									>
+										{review?.createdAt}
+									</Text>
+									{reviewState ? (
+										<UpdateInput
+											onChange={(e) =>
+												setUpdateDescription(
+													e.target.value
+												)
+											}
+										/>
+									) : (
+										<Text>{review?.comment}</Text>
+									)}
+								</div>
+								<div style={{ width: '3rem' }}>
+									<OptionBtn
+										onClick={() => {
+											const q =
+												window.confirm(
+													'리뷰를 삭제하시겠습니까 ? '
+												);
+											if (q) {
+												console.log(review._id);
+												dispatch(
+													deleteReviewDB(review._id)
+												);
+												console.log(getIdFromToken());
+											}
+										}}
+									>
+										X
+									</OptionBtn>
+									<OptionBtn onClick={updateReview}>
+										수정
+									</OptionBtn>
+								</div>
 							</div>
-							<div style={{ width: '3rem' }}>
-								<OptionBtn onClick={deleteReview}>X</OptionBtn>
-								<OptionBtn onClick={updateReview}>
-									수정
-								</OptionBtn>
-							</div>
-						</div>
-					</ReviewBox>
+						</ReviewBox>
+					))}
 				</ScrollX>
 				<FlexCenterR>
 					<Input
@@ -327,7 +421,7 @@ const Detail = () => {
 };
 
 const Section = styled.section`
-	width: 80vw;
+	width: 60vw;
 	padding-left: 10rem;
 	padding-right: 10rem;
 `;
@@ -391,10 +485,6 @@ const ScrollX = styled.div`
 	scroll-snap-type: x mandatory;
 	grid-auto-flow: column;
 	overflow-x: auto;
-	-ms-overflow-style: none;
-	&::-webkit-scrollbar {
-		display: none;
-	}
 `;
 
 const ScrollXChild = styled.div`
@@ -430,6 +520,19 @@ const UpdateInput = styled.input`
 const Flex = styled.div`
 	margin-left: 3rem;
 	margin-right: 3rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+const CounterBtn = styled.button`
+	width: 3rem;
+	height: 3rem;
+	border-radius: 3rem;
+	border: none;
+	margin-left: 1rem;
+	margin-right: 1rem;
 `;
 
 export default Detail;

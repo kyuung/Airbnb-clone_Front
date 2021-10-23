@@ -1,7 +1,12 @@
-import api from '../api/index'
+import api from '../api/index';
 
-const getRoomList = () => {
-  return api.get('roomList')
-}
+const getRoomList = (params) => {
+	return api.get(`api/rooms?${params}`);
+};
 
-export { getRoomList }
+const getDetailRoomList = (params) => {
+	console.log(params);
+	return api.get(`api/rooms/${params}`);
+};
+
+export { getRoomList, getDetailRoomList };

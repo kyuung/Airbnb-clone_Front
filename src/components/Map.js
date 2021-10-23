@@ -2,24 +2,63 @@ import React from 'react'
 import GoogleMap from 'google-map-react'
 import Marker from '../components/Marker'
 
+/**
+ * @author jinsung
+ * @param {*} props
+ * @returns 구글맵 적용
+ */
 const Map = props => {
-  //const Marker = ({ text }) => <div>{text}</div>
+  const { roomList, zoom, type } = props
 
   return (
     <>
-      <div style={{ height: '100vh', width: '100%' }}>
-        <GoogleMap
-          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_KEY }}
-          defaultCenter={props.center}
-          defaultZoom={props.zoom}
-        >
-          <Marker
-            lat={37.42990861398286}
-            lng={126.89336566108994}
-            text="₩217,747"
-          />
-        </GoogleMap>
-      </div>
+      {type ? (
+        <>
+          <div style={{ height: '100vh', width: '100%' }}>
+            <GoogleMap
+              bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_KEY }}
+              defaultCenter={props.center}
+              defaultZoom={zoom}
+            >
+              {roomList.map((v, idx) => {
+                const location = v.location
+                return (
+                  <React.Fragment key={idx}>
+                    <Marker
+                      lat={location.lat}
+                      lng={location.lon}
+                      text={`₩${v.price}`}
+                      info={v}
+                    />
+                  </React.Fragment>
+                )
+              })}
+            </GoogleMap>
+          </div>
+        </>
+      ) : (
+        <>
+          <div style={{ height: '100vh', width: '100%' }}>
+            <GoogleMap
+              bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_KEY }}
+              defaultCenter={props.center}
+              defaultZoom={zoom}
+            >
+              {roomList.map((v, idx) => {
+                const location = v.location
+                return (
+                  <Marker
+                    lat={location.lat}
+                    lng={location.lon}
+                    type="home"
+                    info={v}
+                  ></Marker>
+                )
+              })}
+            </GoogleMap>
+          </div>
+        </>
+      )}
     </>
   )
 }
@@ -29,7 +68,7 @@ Map.defaultProps = {
     lat: 37.42990861398286,
     lng: 126.89336566108994,
   },
-  zoom: 14,
+  zoom: 7,
   options: {
     gestureHandling: 'cooperative',
   },

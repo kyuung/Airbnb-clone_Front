@@ -2,11 +2,13 @@ import React, { Children } from 'react';
 import styled from 'styled-components';
 
 const Img = (props) => {
-	const { width, height, bradius, others, src, children } = props;
+	const { width, height, bradius, others, src, _onClick, children } = props;
 	const styles = { width, height, bradius, others, src };
 	return (
 		<>
-			<ImgBox {...styles}>{children}</ImgBox>
+			<ImgBox {...styles} onClick={_onClick}>
+				{children}
+			</ImgBox>
 		</>
 	);
 };
@@ -18,6 +20,7 @@ Img.defaultProps = {
 	src: 'https://my-speak-app.s3.ap-northeast-2.amazonaws.com/cat1.jpeg',
 	others: '',
 	children: null,
+	_onClick: () => {},
 };
 
 const ImgBox = styled.div`

@@ -1,38 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { BsHeart } from 'react-icons/bs'
 
 const Card = props => {
-  const { image_url, width, height } = props
+  const { info, width, height } = props
   const styles = {
     width: width,
     height: height,
   }
 
   return (
-    <CardContentsArea>
-      <CardArea {...styles}>
-        <ImgArea image_url={image_url}>
-          <IconArea>
-            <BsHeart />
-          </IconArea>
-        </ImgArea>
-        <CardContentArea>
-          <div>
-            <span style={{ fontWeight: '700' }}>Balamban,중부 비사야</span>
-          </div>
-          <div>₩273,718 / 박</div>
-        </CardContentArea>
-        <CardContentArea>
-          <div>
-            <span style={{ color: '#979a9e' }}>2,954km거리</span>
-          </div>
-          <div>
-            <span style={{ color: '#979a9e' }}>11월 12일 - 11월 19일</span>
-          </div>
-        </CardContentArea>
-      </CardArea>
-    </CardContentsArea>
+    <Link to={`/rooms/${info._id}`}>
+      <CardContentsArea>
+        <CardArea {...styles}>
+          <ImgArea image_url={info.imageUrl[0]}>
+            <IconArea>
+              <BsHeart />
+            </IconArea>
+          </ImgArea>
+          <CardContentArea>
+            <div>
+              <span style={{ fontWeight: '600' }}>{info.locationName}</span>
+            </div>
+            <div>₩{info.price} / 박</div>
+          </CardContentArea>
+          <CardContentArea>
+            <div>
+              <span style={{ color: '#979a9e' }}>{info.distance}km거리</span>
+            </div>
+            <div>
+              <span style={{ color: '#979a9e' }}>{info.available}</span>
+            </div>
+          </CardContentArea>
+        </CardArea>
+      </CardContentsArea>
+    </Link>
   )
 }
 
@@ -46,6 +49,7 @@ const CardContentsArea = styled.div`
   grid-template-columns: 100%;
   isolation: isolate;
   box-sizing: border-box;
+  cursor: pointer;
 `
 const ImgArea = styled.div`
   background-image: url('${props => props.image_url}');
