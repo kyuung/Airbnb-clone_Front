@@ -71,6 +71,7 @@ const SignModal = props => {
     }
     dispatch(postUserLoginDB(params))
     setSignInModal(false)
+    setSignStatus(false)
   }
 
   const signUp = async () => {

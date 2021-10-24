@@ -23,14 +23,12 @@ const Map = props => {
               {roomList.map((v, idx) => {
                 const location = v.location
                 return (
-                  <React.Fragment key={idx}>
-                    <Marker
-                      lat={location.lat}
-                      lng={location.lon}
-                      text={`₩${v.price}`}
-                      info={v}
-                    />
-                  </React.Fragment>
+                  <Marker
+                    lat={location.lat}
+                    lng={location.lon}
+                    text={`₩${v.price}`}
+                    info={v}
+                  />
                 )
               })}
             </GoogleMap>

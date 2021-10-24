@@ -15,7 +15,6 @@ import { setIsFocusReducer } from '../redux/modules/roomSlice'
  * @returns 지역별 목록 리스트
  */
 const ColumnList = props => {
-  console.log('props', props)
   const categoryNm = decodeURIComponent(props.location.search.substr(10))
   const dispatch = useDispatch()
   const roomList = useSelector(state => state.room.pageList)
